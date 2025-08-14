@@ -24,12 +24,6 @@ This file contains global instructions and preferences that Claude should follow
 - React: Prefer React Context over prop drilling, scoped close to consumers
 - File naming: kebab-case for non-components, PascalCase for components
 
-#### Python
-
-- [Style guide preferences]
-- [Common libraries to use/avoid]
-- [Project structure preferences]
-
 #### Other Languages
 
 - [Add sections for other languages you work with]
@@ -132,16 +126,6 @@ _Note: Individual projects may have their own CLAUDE.md that overrides these glo
 ## Raw Ideas / To Be Organized
 
 [Dump your ideas here and ask Claude to help organize them into the sections above]
-
-- Prefer functional programming over OOP. Use pure functions that can easily be tested and use factory functions in the case where we need to "instantiate" something.
-- Use pnpm for projects and also for monorepos if a monorepo is needed
-- use Prettier with default settings for formatting. Add a `pnpm format` to package.json which will write to files and a `pnpm format:check` that just checks
-- use eslint to lint but with the eslint.config.js
-- Use TypeScript
-- If using React only use functional components. avoid too many props and prop drilling and prefer React context, scoped as close to the components that need to consume that context as possible
-- React - use PascalCase for component names, declare props as interfaces, inline by default or declared at the top of the component file if more than a few properties in size
-- for all files always declare explicit export constants instead of default exports
-- for non components use kebab-case file names and not camelCase
 
 ---
 
