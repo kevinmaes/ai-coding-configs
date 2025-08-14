@@ -8,17 +8,21 @@ This file contains global instructions and preferences that Claude should follow
 
 ### General Principles
 
-- [Add your coding philosophy here]
-- [Preferred patterns and approaches]
-- [Anti-patterns to avoid]
+- Prefer functional programming over OOP
+- Use pure functions for testability
+- Use factory functions instead of classes when instantiation is needed
 
 ### Language-Specific Guidelines
 
 #### JavaScript/TypeScript
 
-- [Preferred patterns, libraries, conventions]
-- [Testing approach]
-- [Module structure preferences]
+- Always use TypeScript
+- Use named exports exclusively (no default exports)
+- React: Use only functional components with hooks
+- React: Use PascalCase for component names
+- React: Define props as interfaces, inline for small props or at top of file for larger ones
+- React: Prefer React Context over prop drilling, scoped close to consumers
+- File naming: kebab-case for non-components, PascalCase for components
 
 #### Python
 
@@ -110,9 +114,10 @@ This file contains global instructions and preferences that Claude should follow
 
 ### Preferred Tools & Libraries
 
-- [List of go-to tools for different tasks]
-- [Libraries to prefer/avoid]
-- [Command-line tools preferences]
+- Package manager: pnpm (including for monorepos)
+- Formatting: Prettier with default settings
+- Linting: ESLint with eslint.config.js
+- Scripts: Add `pnpm format` (writes) and `pnpm format:check` (checks only)
 
 ### Claude Code Specific
 
@@ -128,6 +133,16 @@ _Note: Individual projects may have their own CLAUDE.md that overrides these glo
 
 [Dump your ideas here and ask Claude to help organize them into the sections above]
 
+- Prefer functional programming over OOP. Use pure functions that can easily be tested and use factory functions in the case where we need to "instantiate" something.
+- Use pnpm for projects and also for monorepos if a monorepo is needed
+- use Prettier with default settings for formatting. Add a `pnpm format` to package.json which will write to files and a `pnpm format:check` that just checks
+- use eslint to lint but with the eslint.config.js
+- Use TypeScript
+- If using React only use functional components. avoid too many props and prop drilling and prefer React context, scoped as close to the components that need to consume that context as possible
+- React - use PascalCase for component names, declare props as interfaces, inline by default or declared at the top of the component file if more than a few properties in size
+- for all files always declare explicit export constants instead of default exports
+- for non components use kebab-case file names and not camelCase
+
 ---
 
-_Last updated: [Date]_
+_Last updated: 2025-08-14_
