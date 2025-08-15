@@ -5,6 +5,7 @@ This file contains global instructions and preferences that Claude should follow
 
 ## Core Principles
 - Functional programming over OOP (pure functions, factory functions)
+- Exception: Use classes for performance-critical code with many instances (e.g., creative coding, game entities)
 
 ## Technical Standards
 - TypeScript always, named exports only (no default exports)
@@ -55,6 +56,7 @@ This file contains global instructions and preferences that Claude should follow
 - Test structure: AAA pattern (Arrange, Act, Assert)
 - Format: Prettier default settings
 - Lint: ESLint with eslint.config.js
+- Date/time: date-fns or native JS (if readable and tested)
 
 ### Common package.json scripts
 - `dev`/`start` - Development server
