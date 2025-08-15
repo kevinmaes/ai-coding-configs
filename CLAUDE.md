@@ -10,6 +10,11 @@ This file contains global instructions and preferences that Claude should follow
 - TypeScript always, named exports only (no default exports)
 - File naming: kebab-case by default, PascalCase only for React components
 
+## TypeScript
+- Prefer interfaces over types (especially when extending)
+- Use type unions instead of enums
+- Strict mode always enabled
+
 ## React Development
 ### Framework
 - Primary: React with Vite
@@ -26,6 +31,11 @@ This file contains global instructions and preferences that Claude should follow
 - Local state: single useState or useReducer for grouped changes
 - Avoid: Multiple useState hooks, boolean state proliferation
 - Complex state: XState for event-based management and actor model
+
+### Data Fetching
+- Use React Query (TanStack Query) for server state
+- Handle loading, error, and success states
+- Leverage mutations for data updates
 
 ### Styling
 - Default: Tailwind CSS
@@ -63,10 +73,12 @@ This file contains global instructions and preferences that Claude should follow
 - Separate workflows for unit and E2E tests
 - All workflows must pass before PR merge allowed
 
-## Documentation
+## Documentation 📝
+- **Always concise**, never verbose
 - JSDoc when meaningful
 - README: Short, scannable, use tables/diagrams over text
 - Comments: Explain "why" not "what"
+- Use emojis sparingly for visual interest ✨
 
 ## Security
 - Secrets: .env/.env.local locally, GitHub Secrets for CI, platform env vars
@@ -86,6 +98,14 @@ When large changes cause many failures:
 - Only present truly viable options
 - Make clear recommendations
 - Ask specific, targeted questions
+
+## Accessibility ♿
+- Semantic HTML elements
+- ARIA labels when needed
+- Keyboard navigation support
+- Focus management in SPAs
+- Alt text for images
+- Color contrast compliance
 
 ## UI/UX Standards
 - Button text: Sentence case ("Save changes", not "Save Changes")
