@@ -71,6 +71,7 @@ This file contains global instructions and preferences that Claude should follow
 ### Git Workflow
 - Branches: `feature/description-kebab-case` or GitHub issue names
 - Commits: AI uses conventional commits, humans use single line + details
+- Before committing: Run `pnpm format` to ensure Prettier formatting
 - CI/CD: Quality checks on PRs to main/dev (lint, types, format)
 - Separate workflows for unit and E2E tests
 - All workflows must pass before PR merge allowed
