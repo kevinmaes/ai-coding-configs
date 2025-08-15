@@ -5,7 +5,8 @@ This file contains global instructions and preferences that Claude should follow
 
 ## Core Principles
 - Functional programming over OOP (pure functions, factory functions)
-- Error boundaries at top level, scoped lower when needed
+
+## Technical Standards
 - TypeScript always, named exports only (no default exports)
 - File naming: kebab-case by default, PascalCase only for React components
 
@@ -19,6 +20,7 @@ This file contains global instructions and preferences that Claude should follow
 - Props as interfaces (inline for small, top of file for large)
 - Prefer Context over prop drilling, scoped close to consumers
 - PascalCase component names
+- Error boundaries at top level, scoped lower when needed
 
 ### State Management
 - Local state: single useState or useReducer for grouped changes
