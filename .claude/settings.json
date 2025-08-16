@@ -1,0 +1,38 @@
+{
+  "allow": [
+    "pnpm:*",
+    "git add:*",
+    "git commit:*",
+    "git status:*",
+    "git diff:*",
+    "git checkout:*",
+    "git fetch:*",
+    "git pull:*",
+    "npm run:*",
+    "act:*",
+    "gh pr create:*",
+    "gh pr view:*",
+    "gh run view:*",
+    "mv:*",
+    "cp:*",
+    "mcp__ide__getDiagnostics"
+  ],
+  "deny": [
+    "rm -rf /*",
+    "sudo:*"
+  ],
+  "ask": [
+    "git push:*",
+    "npm install:*",
+    "pnpm add:*",
+    "brew install:*"
+  ],
+  "hooks": {
+    "pre-commit": "# TODO: Set up lint-staged to format only staged files",
+    "post-commit": "# TODO: Add post-commit hooks"
+  },
+  "env": {
+    "NODE_ENV": "development",
+    "EDITOR": "code"
+  }
+}

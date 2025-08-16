@@ -54,6 +54,7 @@ This file contains global instructions and preferences that Claude should follow
 - Build: Vite (unless Next.js)
 - Test: Vitest (unit), React Testing Library, Playwright (E2E)
 - Test structure: AAA pattern (Arrange, Act, Assert)
+- Test preference: Don't run tests automatically after changes (developer uses test:watch)
 - Format: Prettier default settings
 - Lint: ESLint with eslint.config.js
 - Date/time: date-fns or native JS (if readable and tested)
@@ -101,6 +102,7 @@ When large changes cause many failures:
 - Only present truly viable options
 - Make clear recommendations
 - Ask specific, targeted questions
+- When gathering information, ask ONE question at a time for better conversation flow
 
 ## Accessibility ♿
 - Semantic HTML elements
