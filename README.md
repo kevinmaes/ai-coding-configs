@@ -1,11 +1,15 @@
 # claude
-Claude configuration files, settings, or documentation applicable to all of my project repositories
+Global Claude Code configuration - settings and AI agents for all projects
 
-## Syncing CLAUDE.md
+## What's included
 
-The `sync-claude.sh` script syncs your machine-level CLAUDE.md with the one from this repo.
+- **CLAUDE.md** - Global instructions (coding standards, preferences)
+- **settings.json** - Tool permissions (what Claude can run without asking)
+- **agents/** - Custom AI agents (quality-checker, dependency-updater, etc.)
 
-### Usage
+## Syncing
+
+The `sync-claude.sh` script deploys everything to `~/.claude/`:
 
 ```bash
 # From anywhere on your machine
@@ -15,11 +19,12 @@ The `sync-claude.sh` script syncs your machine-level CLAUDE.md with the one from
 ./sync-claude.sh
 ```
 
-### What it does
+### What it syncs
 
-1. Fetches the latest `main` branch from origin
-2. Copies `CLAUDE.md` from `origin/main` to `~/.claude/CLAUDE.md`
-3. Shows a success message
+1. Fetches latest `main` branch
+2. Copies `CLAUDE.md` → `~/.claude/CLAUDE.md`
+3. Copies `settings.json` → `~/.claude/settings.json`
+4. Copies all agents → `~/.claude/agents/`
 
 ### Prerequisites
 
