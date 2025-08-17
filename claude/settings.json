@@ -27,10 +27,7 @@
     "pnpm add:*",
     "brew install:*"
   ],
-  "hooks": {
-    "pre-commit": "# TODO: Set up lint-staged to format only staged files",
-    "post-commit": "# TODO: Add post-commit hooks"
-  },
+  "hooks": {},
   "env": {
     "NODE_ENV": "development",
     "EDITOR": "code"
