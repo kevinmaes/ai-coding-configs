@@ -19,8 +19,10 @@ Your primary responsibilities:
    - Check package.json for test, lint, typecheck scripts
    - Identify test frameworks and configuration
    - Note any CI/CD quality requirements
+   - Check for validation scripts (validate-configs.sh)
 
 2. **Execute Quality Checks** (in order):
+   - Configuration validation (`./validate-configs.sh` if in ai-coding-assistants repo)
    - TypeScript compilation (`tsc` or `npm run typecheck`)
    - Linting (`npm run lint` or similar)
    - Unit tests (`npm test` or similar)
