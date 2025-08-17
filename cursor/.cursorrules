@@ -1,0 +1,101 @@
+# Cursor AI Assistant Rules
+
+You are an AI assistant helping with code development. Follow these principles and standards.
+
+## Core Principles
+- Functional programming over OOP - use pure functions and factory functions
+- Exception: Use classes only for performance-critical code with many instances
+- Always write clear, concise code with meaningful variable names
+
+## Technical Standards
+- Always use TypeScript, never plain JavaScript
+- Use named exports only (no default exports)
+- File naming: kebab-case by default, PascalCase only for React components
+
+## TypeScript Guidelines
+- Prefer interfaces over types (especially when extending)
+- Use type unions instead of enums
+- Always enable strict mode
+- Write type-safe code with proper type annotations
+
+## React Development
+### Framework
+- Use React with Vite for new projects
+- Use Next.js only when SSR/SSG is specifically needed
+
+### Component Patterns
+- Write only functional components with hooks (no class components)
+- Define props as interfaces (inline for small, top of file for large)
+- Prefer Context API over prop drilling, scope contexts close to consumers
+- Use PascalCase for component names
+- Implement error boundaries at appropriate levels
+
+### State Management
+- Use single useState or useReducer for grouped state changes
+- Avoid multiple useState hooks for related state
+- For complex state machines, consider XState
+
+### Data Fetching
+- Use React Query (TanStack Query) for server state management
+- Always handle loading, error, and success states explicitly
+- Use mutations for data updates
+
+### Styling
+- Use Tailwind CSS as the default styling solution
+- Alternatives when needed: Chakra UI, CSS Modules, Emotion
+- Never use styled-components
+
+## Project Structure
+- Organize by layers: `/components/`, `/services/`, `/utils/`, `/hooks/`, `/types/`
+- Co-locate test files with source: `Button.tsx`, `Button.test.tsx`
+- Use `.test.ts(x)` for unit tests, `.spec.ts(x)` for E2E tests
+
+## Development Workflow
+- Package manager: pnpm (including for monorepos)
+- Build tool: Vite (unless using Next.js)
+- Testing: Vitest for unit tests, React Testing Library, Playwright for E2E
+- Use AAA pattern for tests: Arrange, Act, Assert
+- Don't run tests automatically - developer uses test:watch
+- Format with Prettier (default settings)
+- Lint with ESLint using eslint.config.js
+
+## Git Workflow
+- Create feature branches: `feature/description-kebab-case`
+- Write clear, concise commit messages
+- Run formatters before committing
+
+## Documentation
+- Keep documentation concise and scannable
+- Write JSDoc comments only when they add value
+- Explain "why" not "what" in comments
+- Use tables and diagrams over long text blocks
+
+## Communication Style
+- Keep responses concise and scannable
+- Present only truly viable options
+- Make clear recommendations
+- Ask specific, targeted questions
+- Ask ONE question at a time for better conversation flow
+
+## Accessibility
+- Use semantic HTML elements
+- Add ARIA labels when needed
+- Support keyboard navigation
+- Manage focus in SPAs properly
+- Include alt text for images
+- Ensure proper color contrast
+
+## Security
+- Never expose or log secrets/keys
+- Use environment variables for sensitive data
+- Follow security best practices
+
+## UI/UX Standards
+- Use sentence case for button text ("Save changes", not "Save Changes")
+
+## Code Quality
+- Write clean, self-documenting code
+- Avoid premature optimization
+- Follow SOLID principles where applicable
+- Keep functions small and focused
+- Use meaningful variable and function names

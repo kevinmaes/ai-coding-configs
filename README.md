@@ -1,39 +1,55 @@
-# claude
-Global Claude Code configuration - settings and AI agents for all projects
+# AI Coding Assistants Configuration
 
-## What's included
+Unified configuration for AI coding assistants (Claude, Cursor, and future tools).
 
-- **CLAUDE.md** - Global instructions (coding standards, preferences)
-- **settings.json** - Tool permissions (what Claude can run without asking)
-- **agents/** - Custom AI agents (quality-checker, dependency-updater, etc.)
+## Structure
 
-## Syncing
-
-The `sync-claude.sh` script deploys everything to `~/.claude/`:
-
-```bash
-# From anywhere on your machine
-./path/to/sync-claude.sh
-
-# Or from within this repo
-./sync-claude.sh
+```
+├── claude/          # Claude Code specific
+│   ├── CLAUDE.md    # Instructions
+│   ├── settings.json # Permissions
+│   └── agents/      # Custom AI agents
+├── cursor/          # Cursor specific
+│   └── .cursorrules # Instructions
+├── shared/          # Common principles
+│   └── principles.md # Source of truth
+└── sync-all.sh      # Deploy configs
 ```
 
-### What it syncs
+## Quick Start
 
-1. Fetches latest `main` branch
-2. Copies `CLAUDE.md` → `~/.claude/CLAUDE.md`
-3. Copies `settings.json` → `~/.claude/settings.json`
-4. Copies all agents → `~/.claude/agents/`
+```bash
+# Clone and sync all configurations
+git clone https://github.com/[username]/ai-coding-assistants.git
+cd ai-coding-assistants
+./sync-all.sh
+```
 
-### Prerequisites
+## What Gets Synced
 
-- Git installed
-- This repo cloned locally
+**Claude** → `~/.claude/`
+- CLAUDE.md (coding standards)
+- settings.json (permissions)
+- Custom agents
+
+**Cursor** → `~/`
+- .cursorrules (coding standards)
+
+## Updating Configurations
+
+1. **Edit shared/principles.md** for universal changes
+2. **Use config-sync agent** to propagate: "Use the config-sync agent to update all tools"
+3. **Review and commit** changes
+
+## Custom Agents
+
+- **config-sync** - Translates principles across tools
+- **quality-checker** - Runs tests, lint, typecheck
+- **dependency-updater** - Updates packages safely
+- **monorepo-navigator** - pnpm workspace helper
+
+## Prerequisites
+
+- Git
 - `~/.claude/` directory exists
-
-### Making the script executable
-
-```bash
-chmod +x sync-claude.sh
-```
+- Tools installed (Claude Code, Cursor, etc.)
