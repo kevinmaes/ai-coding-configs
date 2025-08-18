@@ -20,19 +20,21 @@ Unified configuration for AI coding assistants (Claude, Cursor, and future tools
 
 ```bash
 # Clone and sync all configurations
-git clone https://github.com/[username]/ai-coding-assistants.git
-cd ai-coding-assistants
+git clone https://github.com/[username]/ai-coding-configs.git
+cd ai-coding-configs
 ./sync-all.sh
 ```
 
 ## What Gets Synced
 
 **Claude** → `~/.claude/`
+
 - CLAUDE.md (coding standards)
 - settings.json (permissions)
 - Custom agents
 
 **Cursor** → `~/`
+
 - .cursorrules (coding standards)
 
 ## Updating Configurations
