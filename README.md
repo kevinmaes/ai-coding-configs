@@ -1,4 +1,4 @@
-# AI Coding Assistants Configuration
+# AI Coding Configs
 
 Unified configuration for AI coding assistants (Claude, Cursor, and future tools).
 
