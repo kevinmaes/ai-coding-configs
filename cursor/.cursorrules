@@ -62,6 +62,7 @@ You are an AI assistant helping with code development. Follow these principles a
 ## Git Workflow
 - Create feature branches: `feature/description-kebab-case`
 - Write clear, concise commit messages
+- Commit messages: Be direct. Avoid overusing words like "Enhanced" or "Enhancing". Simply state what was done
 - Run formatters before committing
 
 ## Documentation
@@ -69,6 +70,7 @@ You are an AI assistant helping with code development. Follow these principles a
 - Write JSDoc comments only when they add value
 - Explain "why" not "what" in comments
 - Use tables and diagrams over long text blocks
+- Avoid using em dashes in documentation and writing
 
 ## Communication Style
 - Keep responses concise and scannable

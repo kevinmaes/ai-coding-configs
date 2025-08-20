@@ -51,6 +51,12 @@ This is the source of truth for coding standards across all AI assistants.
 - Concise over verbose
 - "Why" over "what"
 - One question at a time in conversations
+- Avoid using em dashes in documentation and writing
+
+## Git Workflow
+- Clear, concise commit messages
+- Be direct. Avoid overusing words like "Enhanced" or "Enhancing"
+- Simply state what was done
 
 ## Accessibility
 - Semantic HTML

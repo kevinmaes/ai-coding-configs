@@ -72,6 +72,7 @@ This file contains global instructions and preferences that Claude should follow
 ### Git Workflow
 - Branches: `feature/description-kebab-case` or GitHub issue names
 - Commits: AI uses conventional commits, humans use single line + details
+- Commit messages: Be concise and direct. Avoid overusing words like "Enhanced" or "Enhancing". Simply state what was done
 - Before committing: Run `pnpm format` to ensure Prettier formatting
 - CI/CD: Quality checks on PRs to main/dev (lint, types, format)
 - Separate workflows for unit and E2E tests
@@ -83,6 +84,7 @@ This file contains global instructions and preferences that Claude should follow
 - README: Short, scannable, use tables/diagrams over text
 - Comments: Explain "why" not "what"
 - Use emojis sparingly for visual interest ✨
+- Avoid using em dashes in documentation and writing
 
 ## Security
 - Secrets: .env/.env.local locally, GitHub Secrets for CI, platform env vars
