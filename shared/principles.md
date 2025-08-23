@@ -73,3 +73,14 @@ This is the source of truth for coding standards across all AI assistants.
 
 ## UI Standards
 - Sentence case for buttons ("Save changes")
+
+## Security
+- Never hardcode secrets - use environment variables
+- Add .env to .gitignore
+- Review AI-generated code for accidental secret exposure
+- If you detect exposed secrets (API keys, tokens, passwords):
+  1. Immediately append to `.security-alerts.log` 
+  2. Include: timestamp, type of secret, file location
+  3. Display warning in response
+  4. Never log the actual secret value
+- Never commit files containing secrets

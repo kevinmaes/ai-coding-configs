@@ -27,7 +27,9 @@
     "pnpm add:*",
     "brew install:*"
   ],
-  "hooks": {},
+  "hooks": {
+    "post-edit": ["pnpm format"]
+  },
   "env": {
     "NODE_ENV": "development",
     "EDITOR": "code"

@@ -85,6 +85,11 @@ This file contains global instructions and preferences that Claude should follow
 - Separate workflows for unit and E2E tests
 - All workflows must pass before PR merge allowed
 
+### Hooks
+- Post-edit hook: Automatically runs `pnpm format` after file edits
+- Ensures consistent code formatting throughout the session
+- Configured in claude/settings.json
+
 ## Documentation 📝
 - **Always concise**, never verbose
 - JSDoc when meaningful
@@ -95,7 +100,15 @@ This file contains global instructions and preferences that Claude should follow
 
 ## Security
 - Secrets: .env/.env.local locally, GitHub Secrets for CI, platform env vars
-- LLM/MCP: [Prevent sensitive data leaks - to be defined]
+- Never hardcode secrets - use environment variables
+- Add .env to .gitignore
+- Review AI-generated code for accidental secret exposure
+- If you detect exposed secrets (API keys, tokens, passwords):
+  1. Immediately append to `.security-alerts.log` 
+  2. Include: timestamp, type of secret, file location
+  3. Display warning in response
+  4. Never log the actual secret value
+- Never commit files containing secrets
 
 ## Recovery Strategy
 When large changes cause many failures:
