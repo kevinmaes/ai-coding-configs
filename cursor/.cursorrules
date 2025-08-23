@@ -50,6 +50,13 @@ You are an AI assistant helping with code development. Follow these principles a
 - Co-locate test files with source: `Button.tsx`, `Button.test.tsx`
 - Use `.test.ts(x)` for unit tests, `.spec.ts(x)` for E2E tests
 
+## AI Planning & Design Specs
+- Store all AI-oriented planning documents in `/design-specs/` folder
+- Include: Feature plans, architecture designs, implementation strategies
+- File naming: `feature-name.md` or `module-name-plan.md`
+- Purpose: Centralized location for AI coding assistants to reference
+- Keep specs updated as implementation evolves
+
 ## Development Workflow
 - Package manager: pnpm (including for monorepos)
 - Build tool: Vite (unless using Next.js)

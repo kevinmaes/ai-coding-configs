@@ -48,6 +48,13 @@ This file contains global instructions and preferences that Claude should follow
 - Test naming: `.test.ts(x)` for unit tests, `.spec.ts(x)` for E2E
 - Coverage: Start with low thresholds, ratchet up as tests grow (never decrease)
 
+## AI Planning & Design Specs
+- Store all AI-oriented planning documents in `/design-specs/` folder
+- Include: Feature plans, architecture designs, implementation strategies
+- File naming: `feature-name.md` or `module-name-plan.md`
+- Purpose: Centralized location for AI coding assistants to reference
+- Keep specs updated as implementation evolves
+
 ## Development Workflow
 ### Tools & Scripts
 - Package manager: pnpm (including monorepos)

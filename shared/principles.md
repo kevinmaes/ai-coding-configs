@@ -41,6 +41,13 @@ This is the source of truth for coding standards across all AI assistants.
 - AAA pattern (Arrange, Act, Assert)
 - .test.ts(x) for unit, .spec.ts(x) for E2E
 
+## AI Planning & Design Specs
+- Store all AI-oriented planning documents in `/design-specs/` folder
+- Include: Feature plans, architecture designs, implementation strategies
+- File naming: `feature-name.md` or `module-name-plan.md`
+- Purpose: Centralized location for AI coding assistants to reference
+- Keep specs updated as implementation evolves
+
 ## Developer Experience
 - pnpm for package management
 - Vite for build (unless Next.js)
