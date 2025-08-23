@@ -1,6 +1,6 @@
 # AI Coding Configs
 
-Unified configuration for AI coding assistants (Claude, Cursor, and future tools).
+Unified configuration for AI coding assistants (Claude and Cursor).
 
 ## Structure
 
@@ -18,15 +18,27 @@ Unified configuration for AI coding assistants (Claude, Cursor, and future tools
 
 ## Quick Start
 
+### Option 1: Interactive Setup (Recommended)
+```bash
+# Clone the repository
+git clone https://github.com/[username]/ai-coding-configs.git
+cd ai-coding-configs
+
+# Run interactive setup
+pnpm install
+pnpm setup
+
+# Add ai-config to PATH
+echo "export PATH=\"\$PATH:$(pwd)\"" >> ~/.bashrc  # or ~/.zshrc
+source ~/.bashrc  # or ~/.zshrc
+```
+
+### Option 2: Quick Sync
 ```bash
 # Clone and sync all configurations
 git clone https://github.com/[username]/ai-coding-configs.git
 cd ai-coding-configs
 ./sync-all.sh
-
-# Optional: Add ai-config to PATH
-echo "export PATH=\"\$PATH:$(pwd)\"" >> ~/.bashrc  # or ~/.zshrc
-source ~/.bashrc  # or ~/.zshrc
 ```
 
 ## What Gets Synced
