@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git add:*)",
       "WebFetch(domain:github.com)",
-      "Bash(gh issue create:*)"
+      "Bash(gh issue create:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }

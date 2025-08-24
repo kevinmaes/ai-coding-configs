@@ -41,8 +41,8 @@ jobs:
           
       - name: Validate principle synchronization
         run: |
-          chmod +x ./validate-sync.sh
-          ./validate-sync.sh
+          chmod +x ./scripts/validate-sync.sh
+          ./scripts/validate-sync.sh
           
       - name: Check for secrets
         run: |
@@ -82,7 +82,7 @@ jobs:
         run: |
           echo "🔧 Checking script permissions..."
           
-          scripts=("sync-all.sh" "validate-configs.sh" "ai-config" "setup-completion.sh" "validate-sync.sh")
+          scripts=("scripts/sync-all.sh" "scripts/validate-configs.sh" "scripts/ai-config" "scripts/setup-completion.sh" "scripts/validate-sync.sh")
           
           for script in "${scripts[@]}"; do
             if [[ -f "$script" ]]; then

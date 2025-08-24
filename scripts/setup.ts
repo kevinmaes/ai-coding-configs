@@ -118,7 +118,7 @@ async function main() {
     const s = spinner();
     s.start('Validating synchronization');
     
-    const validationResult = runCommand('./validate-sync.sh 2>&1');
+    const validationResult = runCommand('./scripts/validate-sync.sh 2>&1');
     s.stop();
     
     if (validationResult.includes('❌')) {

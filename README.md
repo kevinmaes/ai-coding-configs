@@ -13,7 +13,7 @@ Unified configuration for AI coding assistants (Claude and Cursor).
 │   └── .cursorrules # Instructions
 ├── shared/          # Common principles
 │   └── principles.md # Source of truth
-└── sync-all.sh      # Deploy configs
+└── scripts/         # CLI tools and scripts
 ```
 
 ## Quick Start
@@ -29,7 +29,7 @@ pnpm install
 pnpm setup
 
 # Add ai-config to PATH
-echo "export PATH=\"\$PATH:$(pwd)\"" >> ~/.bashrc  # or ~/.zshrc
+echo "export PATH=\"\$PATH:$(pwd)/scripts\"" >> ~/.bashrc  # or ~/.zshrc
 source ~/.bashrc  # or ~/.zshrc
 ```
 
@@ -38,7 +38,7 @@ source ~/.bashrc  # or ~/.zshrc
 # Clone and sync all configurations
 git clone https://github.com/[username]/ai-coding-configs.git
 cd ai-coding-configs
-./sync-all.sh
+./scripts/sync-all.sh
 ```
 
 ## What Gets Synced
