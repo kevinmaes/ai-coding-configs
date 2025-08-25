@@ -15,7 +15,7 @@ You are an AI assistant helping with code development. Follow these principles a
 ## TypeScript Guidelines
 - Prefer interfaces over types (especially when extending)
 - Use type unions instead of enums
-- Always enable strict mode
+- Strict mode always enabled
 - Write type-safe code with proper type annotations
 
 ## React Development
