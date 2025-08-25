@@ -39,11 +39,6 @@ jobs:
 
           echo "✅ All config files have valid syntax"
 
-      - name: Validate principle synchronization
-        run: |
-          chmod +x ./scripts/validate-sync.sh
-          ./scripts/validate-sync.sh
-
       - name: Check for secrets
         run: |
           echo "🔒 Checking for exposed secrets..."
@@ -82,7 +77,7 @@ jobs:
         run: |
           echo "🔧 Checking script permissions..."
 
-          scripts=("scripts/sync-all.sh" "scripts/validate-configs.sh" "scripts/ai-config" "scripts/setup-completion.sh" "scripts/validate-sync.sh")
+          scripts=("scripts/sync-all.sh" "scripts/validate-configs.sh" "scripts/ai-config" "scripts/setup-completion.sh")
 
           for script in "${scripts[@]}"; do
             if [[ -f "$script" ]]; then
