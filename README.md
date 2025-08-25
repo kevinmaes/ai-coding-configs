@@ -19,6 +19,7 @@ Multi-tool configuration management for AI coding assistants. Enhances Claude Co
 ## Quick Start
 
 ### Option 1: Interactive Setup (Recommended)
+
 ```bash
 # Clone the repository
 git clone https://github.com/[username]/ai-coding-configs.git
@@ -34,6 +35,7 @@ source ~/.bashrc  # or ~/.zshrc
 ```
 
 ### Option 2: Quick Sync
+
 ```bash
 # Clone and sync all configurations
 git clone https://github.com/[username]/ai-coding-configs.git
@@ -63,17 +65,18 @@ cd ai-coding-configs
 
 The `ai-config` script provides convenient commands for common tasks:
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `ai-config sync` | Sync shared principles to all AI tools | `ai-config sync` |
-| `ai-config check` | Run quality checks (lint, types, tests) | `ai-config check --fix` |
-| `ai-config update-deps` | Update dependencies safely | `ai-config update-deps --major` |
-| `ai-config validate` | Validate all config files | `ai-config validate` |
-| `ai-config help` | Show available commands | `ai-config help` |
+| Command                 | Description                             | Example                         |
+| ----------------------- | --------------------------------------- | ------------------------------- |
+| `ai-config sync`        | Sync shared principles to all AI tools  | `ai-config sync`                |
+| `ai-config check`       | Run quality checks (lint, types, tests) | `ai-config check --fix`         |
+| `ai-config update-deps` | Update dependencies safely              | `ai-config update-deps --major` |
+| `ai-config validate`    | Validate all config files               | `ai-config validate`            |
+| `ai-config help`        | Show available commands                 | `ai-config help`                |
 
 ### Usage with AI Assistants
 
 Tell Claude or Cursor to run these commands:
+
 - "Run `ai-config sync` to update configurations"
 - "Execute `ai-config check` to validate code quality"
 

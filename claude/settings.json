@@ -17,16 +17,8 @@
     "cp:*",
     "mcp__ide__getDiagnostics"
   ],
-  "deny": [
-    "rm -rf /*",
-    "sudo:*"
-  ],
-  "ask": [
-    "git push:*",
-    "npm install:*",
-    "pnpm add:*",
-    "brew install:*"
-  ],
+  "deny": ["rm -rf /*", "sudo:*"],
+  "ask": ["git push:*", "npm install:*", "pnpm add:*", "brew install:*"],
   "hooks": {
     "post-edit": ["pnpm format"]
   },

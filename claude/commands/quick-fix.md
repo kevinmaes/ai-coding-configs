@@ -8,11 +8,13 @@ description: Run format and lint fixes before committing
 Run formatting and linting fixes to clean up code before committing.
 
 ## What it does:
+
 - Formats all files with Prettier
 - Fixes auto-fixable ESLint issues
 - Shows any remaining errors that need manual fixes
 
 ## Commands:
+
 ```bash
 pnpm format
 pnpm lint:fix

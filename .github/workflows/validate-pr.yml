@@ -10,15 +10,15 @@ jobs:
   validate-configs:
     name: Validate Configurations
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Validate config files syntax
         run: |
           echo "🔍 Checking config file syntax..."
-          
+
           # Check JSON files
           for file in $(find . -name "*.json" -not -path "./.git/*"); do
             echo "Validating $file..."
@@ -27,7 +27,7 @@ jobs:
               exit 1
             fi
           done
-          
+
           # Check YAML files  
           for file in $(find . -name "*.yml" -o -name "*.yaml" -not -path "./.git/*"); do
             echo "Validating $file..."
@@ -36,18 +36,18 @@ jobs:
               exit 1
             fi
           done
-          
+
           echo "✅ All config files have valid syntax"
-          
+
       - name: Validate principle synchronization
         run: |
           chmod +x ./scripts/validate-sync.sh
           ./scripts/validate-sync.sh
-          
+
       - name: Check for secrets
         run: |
           echo "🔒 Checking for exposed secrets..."
-          
+
           # Define secret patterns
           patterns=(
             "ghp_[A-Za-z0-9]{36}"      # GitHub Personal Access Token
@@ -57,9 +57,9 @@ jobs:
             "AIza[0-9A-Za-z\\-_]{35}"  # Google API Key
             "sk-[A-Za-z0-9]{48}"       # OpenAI API Key
           )
-          
+
           found_secrets=false
-          
+
           for pattern in "${patterns[@]}"; do
             if grep -r -E "$pattern" . \
               --exclude-dir=.git \
@@ -69,21 +69,21 @@ jobs:
               found_secrets=true
             fi
           done
-          
+
           if $found_secrets; then
             echo "🚨 Potential secrets detected! Please review and remove any exposed credentials."
             echo "If these are false positives, add them to .gitignore or exclude them from this check."
             exit 1
           fi
-          
+
           echo "✅ No secrets detected"
-          
+
       - name: Validate script permissions
         run: |
           echo "🔧 Checking script permissions..."
-          
+
           scripts=("scripts/sync-all.sh" "scripts/validate-configs.sh" "scripts/ai-config" "scripts/setup-completion.sh" "scripts/validate-sync.sh")
-          
+
           for script in "${scripts[@]}"; do
             if [[ -f "$script" ]]; then
               if [[ ! -x "$script" ]]; then

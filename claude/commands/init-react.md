@@ -8,6 +8,7 @@ description: Initialize a new React project with our preferred setup
 Set up a new React project with TypeScript, Vite, and our standard configuration.
 
 ## Steps:
+
 1. Create Vite project with React TypeScript template
 2. Install additional dependencies (React Query, React Router, etc.)
 3. Set up folder structure (/components, /services, /utils, /hooks, /types)
@@ -16,6 +17,7 @@ Set up a new React project with TypeScript, Vite, and our standard configuration
 6. Create basic test setup with Vitest
 
 ## Command:
+
 ```bash
 pnpm create vite . --template react-ts
 pnpm install
