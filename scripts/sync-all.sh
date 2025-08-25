@@ -2,6 +2,8 @@
 
 # Sync all AI coding assistant configurations
 # This script syncs configurations for all supported tools
+# 
+# For an interactive setup experience, run: pnpm install && pnpm setup
 
 echo "🤖 Syncing AI Coding Assistant Configurations..."
 

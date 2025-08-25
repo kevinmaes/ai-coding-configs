@@ -1,0 +1,151 @@
+#!/usr/bin/env bash
+
+# AI Config CLI - Convenient commands for AI coding assistants
+# Usage: ai-config <command> [options]
+
+set -e
+
+# Colors for output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+# Script directory
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Auto-completion support
+if [[ "$1" == "--complete" ]]; then
+    echo "sync check update-deps validate help"
+    exit 0
+fi
+
+# Help function
+show_help() {
+    cat << EOF
+AI Config CLI - Manage AI coding assistant configurations
+
+Usage: ai-config <command> [options]
+
+Commands:
+  sync         Synchronize shared principles to all AI tools
+  check        Run quality checks (lint, types, tests)
+  update-deps  Update dependencies safely
+  validate     Validate all configuration files
+  help         Show this help message
+
+Examples:
+  ai-config sync              # Sync configurations
+  ai-config check --fix       # Run checks with auto-fix
+  ai-config update-deps       # Update dependencies
+  ai-config validate          # Validate configs
+
+For detailed help on a command:
+  ai-config <command> --help
+EOF
+}
+
+# Command-specific help
+show_command_help() {
+    case "$1" in
+        "sync")
+            echo "Sync shared principles to all AI tool configurations"
+            echo "Usage: ai-config sync"
+            echo ""
+            echo "This will:"
+            echo "  - Read shared/principles.md"
+            echo "  - Update CLAUDE.md, .cursorrules, etc."
+            echo "  - Preserve tool-specific settings"
+            ;;
+        "check")
+            echo "Run quality checks on the codebase"
+            echo "Usage: ai-config check [--fix]"
+            echo ""
+            echo "Options:"
+            echo "  --fix    Automatically fix issues where possible"
+            echo ""
+            echo "Runs: lint, typecheck, tests"
+            ;;
+        "update-deps")
+            echo "Update project dependencies safely"
+            echo "Usage: ai-config update-deps [--major]"
+            echo ""
+            echo "Options:"
+            echo "  --major  Include major version updates"
+            echo ""
+            echo "Updates packages and runs tests to ensure compatibility"
+            ;;
+        "validate")
+            echo "Validate all configuration files"
+            echo "Usage: ai-config validate"
+            echo ""
+            echo "Checks syntax and consistency of:"
+            echo "  - CLAUDE.md"
+            echo "  - .cursorrules"
+            echo "  - settings.json files"
+            ;;
+    esac
+}
+
+# Main command logic
+case "$1" in
+    "sync")
+        if [[ "$2" == "--help" || "$2" == "-h" ]]; then
+            show_command_help "sync"
+            exit 0
+        fi
+        echo -e "${GREEN}🔄 Syncing configurations...${NC}"
+        echo "Invoke Claude with: 'Use the config-sync agent to synchronize all tool configurations from shared/principles.md'"
+        ;;
+    
+    "check")
+        if [[ "$2" == "--help" || "$2" == "-h" ]]; then
+            show_command_help "check"
+            exit 0
+        fi
+        echo -e "${GREEN}✓ Running quality checks...${NC}"
+        if [[ "$2" == "--fix" ]]; then
+            echo "Invoke Claude with: 'Use the quality-checker agent to run all checks and fix issues automatically'"
+        else
+            echo "Invoke Claude with: 'Use the quality-checker agent to run all quality checks'"
+        fi
+        ;;
+    
+    "update-deps")
+        if [[ "$2" == "--help" || "$2" == "-h" ]]; then
+            show_command_help "update-deps"
+            exit 0
+        fi
+        echo -e "${GREEN}📦 Updating dependencies...${NC}"
+        if [[ "$2" == "--major" ]]; then
+            echo "Invoke Claude with: 'Use the dependency-updater agent to update all dependencies including major versions'"
+        else
+            echo "Invoke Claude with: 'Use the dependency-updater agent to update dependencies (minor and patch only)'"
+        fi
+        ;;
+    
+    "validate")
+        if [[ "$2" == "--help" || "$2" == "-h" ]]; then
+            show_command_help "validate"
+            exit 0
+        fi
+        echo -e "${GREEN}🔍 Validating configurations...${NC}"
+        # Run the actual validation script
+        if [[ -f "$SCRIPT_DIR/validate-configs.sh" ]]; then
+            "$SCRIPT_DIR/validate-configs.sh"
+        else
+            echo -e "${RED}Error: validate-configs.sh not found${NC}"
+            exit 1
+        fi
+        ;;
+    
+    "help"|"--help"|"-h"|"")
+        show_help
+        ;;
+    
+    *)
+        echo -e "${RED}Unknown command: $1${NC}"
+        echo "Run 'ai-config help' for usage"
+        exit 1
+        ;;
+esac

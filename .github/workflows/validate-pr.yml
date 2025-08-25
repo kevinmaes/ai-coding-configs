@@ -1,0 +1,90 @@
+name: Validate PR
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  validate-configs:
+    name: Validate Configurations
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate config files syntax
+        run: |
+          echo "🔍 Checking config file syntax..."
+
+          # Check JSON files
+          for file in $(find . -name "*.json" -not -path "./.git/*"); do
+            echo "Validating $file..."
+            if ! jq empty "$file" 2>/dev/null; then
+              echo "❌ Invalid JSON: $file"
+              exit 1
+            fi
+          done
+
+          # Check YAML files  
+          for file in $(find . -name "*.yml" -o -name "*.yaml" -not -path "./.git/*"); do
+            echo "Validating $file..."
+            if ! python3 -c "import yaml; yaml.safe_load(open('$file'))" 2>/dev/null; then
+              echo "❌ Invalid YAML: $file"
+              exit 1
+            fi
+          done
+
+          echo "✅ All config files have valid syntax"
+
+      - name: Check for secrets
+        run: |
+          echo "🔒 Checking for exposed secrets..."
+
+          # Define secret patterns
+          patterns=(
+            "ghp_[A-Za-z0-9]{36}"      # GitHub Personal Access Token
+            "ghs_[A-Za-z0-9]{36}"      # GitHub App Token  
+            "github_pat_[A-Za-z0-9_]{82}" # GitHub Fine-grained Token
+            "AKIA[0-9A-Z]{16}"         # AWS Access Key
+            "AIza[0-9A-Za-z\\-_]{35}"  # Google API Key
+            "sk-[A-Za-z0-9]{48}"       # OpenAI API Key
+          )
+
+          found_secrets=false
+
+          for pattern in "${patterns[@]}"; do
+            if grep -r -E "$pattern" . \
+              --exclude-dir=.git \
+              --exclude="*.md" \
+              --exclude-dir=node_modules 2>/dev/null; then
+              echo "❌ Found potential secret matching pattern: $pattern"
+              found_secrets=true
+            fi
+          done
+
+          if $found_secrets; then
+            echo "🚨 Potential secrets detected! Please review and remove any exposed credentials."
+            echo "If these are false positives, add them to .gitignore or exclude them from this check."
+            exit 1
+          fi
+
+          echo "✅ No secrets detected"
+
+      - name: Validate script permissions
+        run: |
+          echo "🔧 Checking script permissions..."
+
+          scripts=("scripts/sync-all.sh" "scripts/validate-configs.sh" "scripts/ai-config" "scripts/setup-completion.sh")
+
+          for script in "${scripts[@]}"; do
+            if [[ -f "$script" ]]; then
+              if [[ ! -x "$script" ]]; then
+                echo "❌ Script $script is not executable"
+                exit 1
+              fi
+              echo "✅ $script has correct permissions"
+            fi
+          done

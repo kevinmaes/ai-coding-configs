@@ -17,17 +17,11 @@
     "cp:*",
     "mcp__ide__getDiagnostics"
   ],
-  "deny": [
-    "rm -rf /*",
-    "sudo:*"
-  ],
-  "ask": [
-    "git push:*",
-    "npm install:*",
-    "pnpm add:*",
-    "brew install:*"
-  ],
-  "hooks": {},
+  "deny": ["rm -rf /*", "sudo:*"],
+  "ask": ["git push:*", "npm install:*", "pnpm add:*", "brew install:*"],
+  "hooks": {
+    "post-edit": ["pnpm format"]
+  },
   "env": {
     "NODE_ENV": "development",
     "EDITOR": "code"
