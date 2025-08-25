@@ -53,6 +53,7 @@ This file contains global instructions and preferences that Claude should follow
 - Include: Feature plans, architecture designs, implementation strategies
 - File naming: `feature-name.md` or `module-name-plan.md`
 - Purpose: Centralized location for AI coding assistants to reference
+- Reference in conversations: Use `@/design-specs/feature.md` to include specific docs
 - Keep specs updated as implementation evolves
 
 ## Development Workflow

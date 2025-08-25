@@ -1,6 +1,6 @@
 # AI Coding Configs
 
-Unified configuration for AI coding assistants (Claude and Cursor).
+Multi-tool configuration management for AI coding assistants. Enhances Claude Code with version-controlled agents, unified principles across tools (Claude, Cursor, and more), and convenient CLI commands.
 
 ## Structure
 
@@ -77,12 +77,16 @@ Tell Claude or Cursor to run these commands:
 - "Run `ai-config sync` to update configurations"
 - "Execute `ai-config check` to validate code quality"
 
-## Custom Agents
+## Pre-built Claude Agents
+
+These agents are automatically synced to `~/.claude/agents/` for use with Claude Code:
 
 - **config-sync** - Translates principles across tools
 - **quality-checker** - Runs tests, lint, typecheck
 - **dependency-updater** - Updates packages safely
 - **monorepo-navigator** - pnpm workspace helper
+
+[Learn more about how we enhance Claude Code →](docs/claude-code-features.md)
 
 ## Prerequisites
 
