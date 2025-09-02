@@ -20,7 +20,9 @@
   "deny": ["rm -rf /*", "sudo:*"],
   "ask": ["git push:*", "npm install:*", "pnpm add:*", "brew install:*"],
   "hooks": {
-    "post-edit": ["pnpm format"]
+    "post-edit": {
+      "command": "pnpm format"
+    }
   },
   "env": {
     "NODE_ENV": "development",
