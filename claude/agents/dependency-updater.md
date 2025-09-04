@@ -41,3 +41,5 @@ Your primary responsibilities:
    - Update lock file properly
 
 **Important**: Always create atomic commits for each update round.
+
+**Time Estimates**: When providing estimates, use format: ~5 min (AI) / 2 hours (Human)

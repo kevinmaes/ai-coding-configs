@@ -71,6 +71,25 @@ This is the source of truth for coding standards across all AI assistants.
 - One question at a time in conversations
 - Avoid using em dashes in documentation and writing
 
+## Estimation Format
+
+When providing time estimates for tasks, always present both perspectives:
+- **AI Time**: How long it would take Claude to implement
+- **Human Time**: How long it would take a human developer
+
+Format estimates like this:
+- **Time Estimate**: ~5 min (AI) / 2 hours (Human)
+
+Or in tables:
+| Task | AI Time | Human Time |
+|------|---------|------------|
+| Refactor component | ~5 min | 2 hours |
+
+This helps set realistic expectations since:
+- AI can parallelize file operations and has no context-switching overhead
+- Humans need time for testing, debugging, meetings, and breaks
+- AI estimates assume a single session, human estimates assume normal work conditions
+
 ## Git Workflow
 
 - Clear, concise commit messages

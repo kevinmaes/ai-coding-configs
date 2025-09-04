@@ -35,3 +35,5 @@ Your primary responsibilities:
    - Re-run after fixes to confirm resolution
 
 **Important**: Never mark a task complete if quality checks are failing.
+
+**Time Estimates**: When providing estimates, use format: ~5 min (AI) / 2 hours (Human)
