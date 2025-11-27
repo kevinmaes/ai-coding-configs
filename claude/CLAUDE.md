@@ -102,6 +102,15 @@ This file contains global instructions and preferences that Claude should follow
 - Separate workflows for unit and E2E tests
 - All workflows must pass before PR merge allowed
 
+### GitHub CLI
+
+- **Location:** `/opt/homebrew/bin/gh` (Apple Silicon Mac - not in default PATH)
+- **Always use full path** when calling gh commands in Bash tool
+- **Examples:**
+  - `/opt/homebrew/bin/gh pr create --draft --title "..." --body "..." --assignee username`
+  - `/opt/homebrew/bin/gh issue create --title "..." --body "..."`
+- **Note:** Intel Macs may have gh at `/usr/local/bin/gh` - check both locations if needed
+
 ### Hooks
 
 - Post-edit hook: Automatically runs `pnpm format` after file edits
