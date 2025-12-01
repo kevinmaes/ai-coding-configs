@@ -3,7 +3,7 @@
 <!--
 📏 Skill File Length Guidance:
 - No hard token limits - Claude Code uses progressive disclosure (loads only when needed)
-- Focus on clarity over brevity
+- Focus on clarity but favor brevity over grammatical correctness.
 - If this file becomes unwieldy (>500 lines or covering too many concepts), consider splitting into multiple focused skills
 - Current approach: One comprehensive XState skill with organized sections
 -->
@@ -43,7 +43,7 @@ Invoke this skill when:
 ### State Hierarchy
 
 **Final States Pattern:**
-Use nested states with a sibling final state for sequential flows:
+Nested states with sibling final state for sequential flows:
 
 ```typescript
 ParentState: {
@@ -68,7 +68,7 @@ ParentState: {
 ### Actions and Side Effects
 
 **Parameterized Actions:**
-Use parameterized actions for reusable logic with different values:
+Parameterized actions for reusable logic with different values:
 
 ```typescript
 actions: {
@@ -82,7 +82,7 @@ entry: { type: 'updateValue', params: { key: 'count' } }
 ```
 
 **Entry Actions for Preparation:**
-Use entry actions to prepare state before async operations:
+Entry actions prepare state before async operations:
 
 ```typescript
 Moving: {
@@ -100,7 +100,7 @@ Moving: {
 ### Guards and Conditions
 
 **Parameterized Guards:**
-Use parameterized guards for reusable conditional logic:
+Parameterized guards for reusable conditional logic:
 
 ```typescript
 guards: {
@@ -120,7 +120,7 @@ on: {
 ### Services and Invocations
 
 **Disposable Instances Pattern:**
-Create object instances on-demand in the input function rather than storing them in context. This is ideal for ephemeral objects that only exist for the duration of an invoked actor.
+Create instances in `invoke.input`, not context. Ideal for ephemeral objects that only exist during actor lifetime.
 
 ```typescript
 // ❌ Anti-pattern: Storing instance in context
@@ -155,16 +155,10 @@ Processing: {
 }
 ```
 
-**Benefits:**
-
-- Automatic garbage collection when actor completes
-- Better serialization (context has no object instances)
-- Stately Inspector compatibility
-- No manual cleanup needed
-- Prevents memory leaks
+**Benefits:** Auto GC, better serialization, Stately Inspector compatible, no cleanup, prevents leaks.
 
 **Event Narrowing with assertEvent:**
-Use `assertEvent` in invoke input to narrow event types:
+`assertEvent` in invoke input narrows event types:
 
 ```typescript
 invoke: {
@@ -213,7 +207,7 @@ invoke: {
 ### State-Driven UI
 
 **Use Tags for Multiple State Checks:**
-When checking multiple states with OR logic, use tags instead of multiple `state.matches()` calls:
+Use tags instead of multiple `state.matches()` calls for OR logic:
 
 ```typescript
 // ❌ Verbose: Multiple matches
@@ -238,7 +232,7 @@ if (state.hasTag('busy')) {
 ## Actor Model
 
 **Passing Parent Actor Reference:**
-Child actors can receive and type the parent actor reference for bidirectional communication:
+Child actors receive and type parent actor ref for bidirectional communication:
 
 ```typescript
 // Parent machine
@@ -326,6 +320,7 @@ const childMachine = setup({
 ## Naming Conventions
 
 **State Machine Configuration:**
+
 - **State names**: Title Case (e.g., `Idle`, `Loading Data`, `Processing Complete`)
 - **Event types**: Sentence case (e.g., `Submit form`, `Data loaded`, `Cancel operation`)
 - **Guard types**: lowercase with spaces, natural language (e.g., `if something meets this condition`, `if user is authenticated`)
