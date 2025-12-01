@@ -43,17 +43,17 @@ Invoke this skill when:
 ### State Hierarchy
 
 **Final States Pattern:**
-Nested states with sibling final state for sequential flows:
+Nested states with sibling final state for sequential flows. Avoids brittle `#rootMachine.childState` targeting across scope boundaries:
 
 ```typescript
 ParentState: {
   initial: 'Step1',
   states: {
     Step1: {
-      on: { NEXT: 'Step2' }
+      on: { 'Next step': 'Step2' }
     },
     Step2: {
-      on: { COMPLETE: 'Done' }
+      on: { 'Complete': 'Done' }
     },
     Done: {
       type: 'final'
@@ -68,17 +68,27 @@ ParentState: {
 ### Actions and Side Effects
 
 **Parameterized Actions:**
-Parameterized actions for reusable logic with different values:
+Parameterized actions for reusable logic with different values. Params can be dynamic (functions) and help TypeScript type event properties:
 
 ```typescript
 actions: {
-  updateValue: assign(({ context, event }, params: { key: string }) => ({
-    [params.key]: event.value
+  updatePosition: assign((_, params: { x: number; y: number }) => ({
+    position: { x: params.x, y: params.y }
   }))
 }
 
-// Usage
-entry: { type: 'updateValue', params: { key: 'count' } }
+// Static params
+entry: { type: 'updatePosition', params: { x: 100, y: 200 } }
+
+// Dynamic params from event (TypeScript now knows event shape)
+on: {
+  'Click': {
+    actions: {
+      type: 'updatePosition',
+      params: ({ event }) => ({ x: event.clientX, y: event.clientY })
+    }
+  }
+}
 ```
 
 **Entry Actions for Preparation:**
@@ -100,19 +110,30 @@ Moving: {
 ### Guards and Conditions
 
 **Parameterized Guards:**
-Parameterized guards for reusable conditional logic:
+Parameterized guards for reusable conditional logic. Params can be dynamic (functions) and help TypeScript type event properties:
 
 ```typescript
 guards: {
-  isGreaterThan: ({ context }, params: { value: number; key: string }) =>
-    context[params.key] > params.value
+  isWithinBounds: (_, params: { x: number; y: number; bounds: Rect }) =>
+    params.x >= params.bounds.left && params.x <= params.bounds.right &&
+    params.y >= params.bounds.top && params.y <= params.bounds.bottom
 }
 
-// Usage
+// Static params
+guard: { type: 'isWithinBounds', params: { x: 10, y: 20, bounds: rect } }
+
+// Dynamic params from event (TypeScript now knows event shape)
 on: {
-  SUBMIT: {
-    guard: { type: 'isGreaterThan', params: { key: 'count', value: 0 } },
-    target: 'Success'
+  'Mouse move': {
+    guard: {
+      type: 'isWithinBounds',
+      params: ({ event, context }) => ({
+        x: event.clientX,
+        y: event.clientY,
+        bounds: context.targetBounds
+      })
+    },
+    target: 'Inside'
   }
 }
 ```
@@ -164,7 +185,7 @@ Processing: {
 invoke: {
   src: 'dataActor',
   input: ({ event }) => {
-    assertEvent(event, 'FETCH_DATA');
+    assertEvent(event, 'Fetch data');
     // TypeScript now knows event.data exists
     return { id: event.data.id };
   }
@@ -260,7 +281,7 @@ const childMachine = setup({
 }).createMachine({
 	// Child can now send events to parent
 	entry: ({ input }) => {
-		input.parentRef.send({ type: 'CHILD_READY' });
+		input.parentRef.send({ type: 'Child ready' });
 	},
 });
 ```
