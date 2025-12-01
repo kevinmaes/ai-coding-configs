@@ -1,5 +1,13 @@
 # XState Skill
 
+<!--
+📏 Skill File Length Guidance:
+- No hard token limits - Claude Code uses progressive disclosure (loads only when needed)
+- Focus on clarity over brevity
+- If this file becomes unwieldy (>500 lines or covering too many concepts), consider splitting into multiple focused skills
+- Current approach: One comprehensive XState skill with organized sections
+-->
+
 Expert guidance for using XState state machines and the actor model in JavaScript, TypeScript, and React projects.
 
 ## When to Use This Skill
@@ -14,63 +22,153 @@ Invoke this skill when:
 
 ## Core Principles
 
-<!-- Add your fundamental XState principles here -->
-<!-- Example:
 - Model behavior as finite state machines
 - Use explicit transitions over implicit state changes
 - Leverage guards for conditional transitions
 - Use actions for side effects
 - Keep machines pure and testable
--->
+- Keep context serializable - avoid storing object instances (improves Stately Inspector compatibility)
+- Store only metadata in context, create disposable instances on-demand in invoke input functions
 
 ## Machine Patterns
 
 ### Basic Machine Structure
 
-<!-- Add your preferred machine setup patterns -->
-<!-- Example:
-- How to organize states
-- Naming conventions for states and events
-- Context vs state data decisions
--->
+**Context Design:**
+- Store metadata and primitives (numbers, strings, enums, simple objects)
+- Avoid storing object instances (better serialization and debugging)
+- Keep context serializable for Stately Inspector compatibility
 
 ### State Hierarchy
 
-<!-- Add patterns for nested/hierarchical states -->
-<!-- Example:
-- When to use parallel states
-- Parent-child state relationships
-- History states usage
--->
+**Final States Pattern:**
+Use nested states with a sibling final state for sequential flows:
+```typescript
+ParentState: {
+  initial: 'Step1',
+  states: {
+    Step1: {
+      on: { NEXT: 'Step2' }
+    },
+    Step2: {
+      on: { COMPLETE: 'Done' }
+    },
+    Done: {
+      type: 'final'
+    }
+  },
+  onDone: {
+    target: 'NextParentState'
+  }
+}
+```
 
 ### Actions and Side Effects
 
-<!-- Add your conventions for actions -->
-<!-- Example:
-- Inline actions vs named actions
-- Action creators
-- Entry/exit actions
-- Assign actions for context updates
--->
+**Parameterized Actions:**
+Use parameterized actions for reusable logic with different values:
+```typescript
+actions: {
+  updateValue: assign(({ context, event }, params: { key: string }) => ({
+    [params.key]: event.value
+  }))
+}
+
+// Usage
+entry: { type: 'updateValue', params: { key: 'count' } }
+```
+
+**Entry Actions for Preparation:**
+Use entry actions to prepare state before async operations:
+```typescript
+Moving: {
+  entry: 'calculateMetadata', // Prepare before invoke
+  invoke: {
+    src: 'animationActor',
+    input: ({ context }) => ({
+      // Use prepared metadata
+      duration: context.calculatedDuration
+    })
+  }
+}
+```
 
 ### Guards and Conditions
 
-<!-- Add guard patterns and best practices -->
-<!-- Example:
-- Inline vs named guards
-- Pure guard functions
-- Complex conditional logic
--->
+**Parameterized Guards:**
+Use parameterized guards for reusable conditional logic:
+```typescript
+guards: {
+  isGreaterThan: ({ context }, params: { value: number; key: string }) =>
+    context[params.key] > params.value
+}
+
+// Usage
+on: {
+  SUBMIT: {
+    guard: { type: 'isGreaterThan', params: { key: 'count', value: 0 } },
+    target: 'Success'
+  }
+}
+```
 
 ### Services and Invocations
 
-<!-- Add patterns for async operations -->
-<!-- Example:
-- Promise-based services
-- Callback services
-- Observable services
-- Actor invocation patterns
--->
+**Disposable Instances Pattern:**
+Create object instances on-demand in the input function rather than storing them in context. This is ideal for ephemeral objects that only exist for the duration of an invoked actor.
+
+```typescript
+// ❌ Anti-pattern: Storing instance in context
+context: {
+  animationInstance: AnimationObject | null; // Hard to serialize, memory leaks
+}
+
+// ✅ Better: Store only metadata in context
+context: {
+  duration: number;
+  speed: number;
+  target: Position;
+}
+
+// Create instance on-demand in invoke
+Processing: {
+  entry: 'calculateMetadata', // Prepare metadata first
+  invoke: {
+    src: 'processingActor',
+    input: ({ context }) => {
+      // Create disposable instance here
+      const instance = new ProcessingObject({
+        duration: context.duration,
+        speed: context.speed,
+        target: context.target
+      });
+
+      return { instance, config: context };
+    },
+    onDone: { target: 'Complete' }
+  }
+}
+```
+
+**Benefits:**
+- Automatic garbage collection when actor completes
+- Better serialization (context has no object instances)
+- Stately Inspector compatibility
+- No manual cleanup needed
+- Prevents memory leaks
+
+**Event Narrowing with assertEvent:**
+Use `assertEvent` in invoke input to narrow event types:
+```typescript
+invoke: {
+  src: 'dataActor',
+  input: ({ event }) => {
+    assertEvent(event, 'FETCH_DATA');
+    // TypeScript now knows event.data exists
+    return { id: event.data.id };
+  }
+}
+```
 
 ## TypeScript Integration
 
@@ -107,23 +205,64 @@ Invoke this skill when:
 
 ### State-Driven UI
 
-<!-- Add UI rendering patterns -->
-<!-- Example:
-- Matching states for conditional rendering
-- Using state values for styling
-- Handling loading/error states
-- Optimistic updates
--->
+**Use Tags for Multiple State Checks:**
+When checking multiple states with OR logic, use tags instead of multiple `state.matches()` calls:
+
+```typescript
+// ❌ Verbose: Multiple matches
+if (state.matches('loading') || state.matches('submitting') || state.matches('validating')) {
+  return <Spinner />;
+}
+
+// ✅ Better: Use tags
+// In machine definition:
+states: {
+  loading: { tags: 'busy' },
+  submitting: { tags: 'busy' },
+  validating: { tags: 'busy' }
+}
+
+// In component:
+if (state.hasTag('busy')) {
+  return <Spinner />;
+}
+```
 
 ## Actor Model
 
-<!-- Add actor model patterns -->
-<!-- Example:
-- Spawning actors
-- Actor communication
-- Parent-child relationships
-- Actor lifecycle management
--->
+**Passing Parent Actor Reference:**
+Child actors can receive and type the parent actor reference for bidirectional communication:
+
+```typescript
+// Parent machine
+const parentMachine = setup({
+  actors: {
+    childActor: childMachine
+  }
+}).createMachine({
+  // ...
+  invoke: {
+    src: 'childActor',
+    input: ({ self }) => ({
+      parentRef: self // Pass parent reference to child
+    })
+  }
+});
+
+// Child machine
+const childMachine = setup({
+  types: {
+    input: {} as {
+      parentRef: ActorRefFrom<typeof parentMachine>; // Type the parent ref
+    }
+  }
+}).createMachine({
+  // Child can now send events to parent
+  entry: ({ input }) => {
+    input.parentRef.send({ type: 'CHILD_READY' });
+  }
+});
+```
 
 ## Testing
 
@@ -229,12 +368,3 @@ Example format:
 ### Unsorted Ideas
 
 <!-- Your ideas go here -->
-
-# Kevin’s Best Practices & Tips
-
-- Parameterized actions and guards
-- Event narrowing with `assertEvent` in invoke input
-- Use nested states and a sibling state with `type: 'final'` and then an `onDone: { target: 'The Next State' }` on the parent of the nested state.
-- Pass in parent ref and type it
-  - Maybe show slide
-- Many instances of `state.matches() || state.matches()` you can use tags on multiple states and then `state.hasTag()`
