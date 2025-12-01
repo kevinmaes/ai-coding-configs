@@ -35,6 +35,7 @@ Invoke this skill when:
 ### Basic Machine Structure
 
 **Context Design:**
+
 - Store metadata and primitives (numbers, strings, enums, simple objects)
 - Avoid storing object instances (better serialization and debugging)
 - Keep context serializable for Stately Inspector compatibility
@@ -43,6 +44,7 @@ Invoke this skill when:
 
 **Final States Pattern:**
 Use nested states with a sibling final state for sequential flows:
+
 ```typescript
 ParentState: {
   initial: 'Step1',
@@ -67,6 +69,7 @@ ParentState: {
 
 **Parameterized Actions:**
 Use parameterized actions for reusable logic with different values:
+
 ```typescript
 actions: {
   updateValue: assign(({ context, event }, params: { key: string }) => ({
@@ -80,6 +83,7 @@ entry: { type: 'updateValue', params: { key: 'count' } }
 
 **Entry Actions for Preparation:**
 Use entry actions to prepare state before async operations:
+
 ```typescript
 Moving: {
   entry: 'calculateMetadata', // Prepare before invoke
@@ -97,6 +101,7 @@ Moving: {
 
 **Parameterized Guards:**
 Use parameterized guards for reusable conditional logic:
+
 ```typescript
 guards: {
   isGreaterThan: ({ context }, params: { value: number; key: string }) =>
@@ -151,6 +156,7 @@ Processing: {
 ```
 
 **Benefits:**
+
 - Automatic garbage collection when actor completes
 - Better serialization (context has no object instances)
 - Stately Inspector compatibility
@@ -159,6 +165,7 @@ Processing: {
 
 **Event Narrowing with assertEvent:**
 Use `assertEvent` in invoke input to narrow event types:
+
 ```typescript
 invoke: {
   src: 'dataActor',
@@ -236,31 +243,31 @@ Child actors can receive and type the parent actor reference for bidirectional c
 ```typescript
 // Parent machine
 const parentMachine = setup({
-  actors: {
-    childActor: childMachine
-  }
+	actors: {
+		childActor: childMachine,
+	},
 }).createMachine({
-  // ...
-  invoke: {
-    src: 'childActor',
-    input: ({ self }) => ({
-      parentRef: self // Pass parent reference to child
-    })
-  }
+	// ...
+	invoke: {
+		src: 'childActor',
+		input: ({ self }) => ({
+			parentRef: self, // Pass parent reference to child
+		}),
+	},
 });
 
 // Child machine
 const childMachine = setup({
-  types: {
-    input: {} as {
-      parentRef: ActorRefFrom<typeof parentMachine>; // Type the parent ref
-    }
-  }
+	types: {
+		input: {} as {
+			parentRef: ActorRefFrom<typeof parentMachine>; // Type the parent ref
+		},
+	},
 }).createMachine({
-  // Child can now send events to parent
-  entry: ({ input }) => {
-    input.parentRef.send({ type: 'CHILD_READY' });
-  }
+	// Child can now send events to parent
+	entry: ({ input }) => {
+		input.parentRef.send({ type: 'CHILD_READY' });
+	},
 });
 ```
 
@@ -328,13 +335,17 @@ const childMachine = setup({
 
 ## Resources and References
 
-<!-- Add helpful links and resources -->
-<!-- Example:
-- Official XState docs
-- Stately Studio
-- Common examples
-- Community patterns
--->
+**Official Documentation:**
+
+- [XState and Stately Documentation](https://stately.ai/docs) - Official docs for XState v5 and Stately tools
+- [XState API Reference](https://stately.ai/docs/api) - Complete API documentation
+- [Stately Studio](https://stately.ai/studio) - Visual editor for state machines
+- [XState GitHub](https://github.com/statelyai/xstate) - Source code and examples
+
+**Learning Resources:**
+
+- [XState Catalogue](https://stately.ai/docs/catalogue) - Common state machine patterns
+- [XState Examples](https://stately.ai/docs/examples) - Real-world examples
 
 ---
 
