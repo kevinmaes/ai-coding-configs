@@ -325,13 +325,13 @@ const childMachine = setup({
 
 ## Naming Conventions
 
-<!-- Add your naming standards -->
-<!-- Example:
-- State names: SCREAMING_SNAKE_CASE or camelCase
-- Event names: UPPER_CASE
-- Action names: camelCase
-- Machine names: camelCase + "Machine" suffix
--->
+**State Machine Configuration:**
+- **State names**: Title Case (e.g., `Idle`, `Loading Data`, `Processing Complete`)
+- **Event types**: Sentence case (e.g., `Submit form`, `Data loaded`, `Cancel operation`)
+- **Guard types**: lowercase with spaces, natural language (e.g., `if something meets this condition`, `if user is authenticated`)
+- **Action types**: camelCase (e.g., `loadData`, `updateContext`, `sendNotification`)
+- **Delay names**: camelCase (e.g., `retryDelay`, `debounceTimeout`, `pollingInterval`)
+- **Machine names**: camelCase with "Machine" suffix (e.g., `authMachine`, `formMachine`)
 
 ## Resources and References
 
