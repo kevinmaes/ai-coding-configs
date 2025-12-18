@@ -49,6 +49,7 @@ cd ai-coding-configs
 
 - CLAUDE.md (coding standards)
 - settings.json (permissions)
+- statusline.sh (terminal status display)
 - Custom agents
 
 **Cursor** → `~/`
@@ -96,3 +97,4 @@ These agents are automatically synced to `~/.claude/agents/` for use with Claude
 - Git
 - `~/.claude/` directory exists
 - Tools installed (Claude Code, Cursor, etc.)
+- `jq` (for statusline feature): `brew install jq`
