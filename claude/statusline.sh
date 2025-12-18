@@ -3,6 +3,7 @@
 # ANSI color codes
 BLUE='\033[34m'
 GREEN='\033[32m'
+YELLOW='\033[33m'
 RESET='\033[0m'
 
 # Read JSON input
@@ -18,15 +19,23 @@ cd "$cwd" 2>/dev/null || exit 0
 short_path=$(echo "$cwd" | awk -F'/' '{if (NF>1) print $(NF-1)"/"$NF; else print $NF}')
 
 # Start building the status line
-status="${BLUE}${short_path}${RESET}"
+status="📂 ${BLUE}${short_path}${RESET}"
 
 # Check if we're in a git repository
 if git rev-parse --git-dir > /dev/null 2>&1; then
+    # Check if we're in a worktree (git-dir and git-common-dir differ)
+    git_dir=$(git rev-parse --git-dir 2>/dev/null)
+    git_common_dir=$(git rev-parse --git-common-dir 2>/dev/null)
+    is_worktree=""
+    if [ "$git_dir" != "$git_common_dir" ]; then
+        is_worktree="🌳 "
+    fi
+
     # Get current branch
     branch=$(git -c core.useBuiltinFSMonitor=false rev-parse --abbrev-ref HEAD 2>/dev/null)
 
     if [ -n "$branch" ]; then
-        status="$status | ${GREEN}${branch}${RESET}"
+        status="$status | ${is_worktree}🌿 ${GREEN}${branch}${RESET}"
 
         # Get git status counts (skip optional locks for performance)
         git_status=$(git -c core.useBuiltinFSMonitor=false status --porcelain 2>/dev/null)
