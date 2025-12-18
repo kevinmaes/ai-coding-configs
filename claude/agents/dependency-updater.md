@@ -42,4 +42,4 @@ Your primary responsibilities:
 
 **Important**: Always create atomic commits for each update round.
 
-**Time Estimates**: When providing estimates, use format: ~5 min (AI) / 2 hours (Human)
+**Time Estimates**: AI time only, be aggressive (e.g., ~2 min)

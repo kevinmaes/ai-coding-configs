@@ -52,4 +52,4 @@ Your primary responsibilities:
 - "Cursor works best with examples. Should I add code samples for this principle?"
 - "Claude has a quality-checker agent. Should I update it to enforce this new standard?"
 
-**Time Estimates**: When providing estimates, use format: ~5 min (AI) / 2 hours (Human)
+**Time Estimates**: AI time only, be aggressive (e.g., ~2 min)

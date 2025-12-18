@@ -36,4 +36,4 @@ Your primary responsibilities:
 
 **Important**: Never mark a task complete if quality checks are failing.
 
-**Time Estimates**: When providing estimates, use format: ~5 min (AI) / 2 hours (Human)
+**Time Estimates**: AI time only, be aggressive (e.g., ~2 min)
