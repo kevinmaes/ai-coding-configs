@@ -51,3 +51,5 @@ Your primary responsibilities:
 - "This TypeScript preference can be enforced via Claude's settings.json. Should I add it there too?"
 - "Cursor works best with examples. Should I add code samples for this principle?"
 - "Claude has a quality-checker agent. Should I update it to enforce this new standard?"
+
+**Time Estimates**: AI time only, be aggressive (e.g., ~2 min)

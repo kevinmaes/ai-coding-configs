@@ -71,6 +71,22 @@ This is the source of truth for coding standards across all AI assistants.
 - One question at a time in conversations
 - Avoid using em dashes in documentation and writing
 
+## Estimation Format
+
+When providing time estimates for tasks, show AI implementation time only. Be aggressive, not conservative.
+
+Format: **~2 min** or in tables:
+| Task | Time |
+|------|------|
+| Refactor component | ~2 min |
+| Add new feature | ~5 min |
+| Fix bug | ~1 min |
+
+Guidelines:
+- Most single-file changes: ~1-2 min
+- Multi-file features: ~3-5 min
+- Complex refactors: ~5-10 min
+
 ## Git Workflow
 
 - Clear, concise commit messages

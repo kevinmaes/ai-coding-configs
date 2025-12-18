@@ -35,3 +35,5 @@ Your primary responsibilities:
    - Re-run after fixes to confirm resolution
 
 **Important**: Never mark a task complete if quality checks are failing.
+
+**Time Estimates**: AI time only, be aggressive (e.g., ~2 min)

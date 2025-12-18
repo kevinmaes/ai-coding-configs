@@ -117,6 +117,22 @@ This file contains global instructions and preferences that Claude should follow
 - Use emojis sparingly for visual interest ✨
 - Avoid using em dashes in documentation and writing
 
+## Estimation Format
+
+When providing time estimates for tasks, show AI implementation time only. Be aggressive, not conservative.
+
+Format: **~2 min** or in tables:
+| Task | Time |
+|------|------|
+| Refactor component | ~2 min |
+| Add new feature | ~5 min |
+| Fix bug | ~1 min |
+
+Guidelines:
+- Most single-file changes: ~1-2 min
+- Multi-file features: ~3-5 min
+- Complex refactors: ~5-10 min
+
 ## Security
 
 - Secrets: .env/.env.local locally, GitHub Secrets for CI, platform env vars
