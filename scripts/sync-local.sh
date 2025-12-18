@@ -20,6 +20,16 @@ echo "✓ Synced CLAUDE.md"
 cp "$PROJECT_ROOT/claude/settings.json" ~/.claude/settings.json
 echo "✓ Synced settings.json"
 
+# Sync statusline script
+cp "$PROJECT_ROOT/claude/statusline.sh" ~/.claude/statusline.sh
+chmod +x ~/.claude/statusline.sh
+echo "✓ Synced statusline.sh"
+
+# Check for jq dependency
+if ! command -v jq &> /dev/null; then
+    echo "⚠️  Warning: jq is required for statusline. Install with: brew install jq"
+fi
+
 # Sync Claude agents
 for agent in "$PROJECT_ROOT"/claude/agents/*.md; do
     if [ -f "$agent" ]; then
