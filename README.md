@@ -5,10 +5,11 @@ Multi-tool configuration management for AI coding assistants. Enhances Claude Co
 ## Structure
 
 ```
-├── claude/          # Claude Code specific
+├── .claude/         # Claude Code specific
 │   ├── CLAUDE.md    # Instructions
 │   ├── settings.json # Permissions
-│   └── agents/      # Custom AI agents
+│   ├── agents/      # Custom AI agents
+│   └── skills/      # Domain-specific knowledge (XState, React, etc.)
 ├── cursor/          # Cursor specific
 │   └── .cursorrules # Instructions
 ├── shared/          # Common principles
@@ -51,6 +52,7 @@ cd ai-coding-configs
 - settings.json (permissions)
 - statusline.sh (terminal status display)
 - Custom agents
+- Skills (domain-specific knowledge)
 
 **Cursor** → `~/`
 
@@ -91,6 +93,17 @@ These agents are automatically synced to `~/.claude/agents/` for use with Claude
 - **monorepo-navigator** - pnpm workspace helper
 
 [Learn more about how we enhance Claude Code →](docs/claude-code-features.md)
+
+## Claude Code Skills
+
+Skills provide domain-specific knowledge and conventions that Claude can reference when working on your projects. Stored in `.claude/skills/` and synced to `~/.claude/skills/`:
+
+- **xstate** - XState patterns, naming conventions, best practices
+- _(Add more skills as needed)_
+
+Skills help maintain consistency across projects by documenting your preferred patterns, naming conventions, and architectural decisions.
+
+[Learn more about Claude Code Skills →](https://github.com/anthropics/claude-code/blob/main/SKILLS.md)
 
 ## Prerequisites
 

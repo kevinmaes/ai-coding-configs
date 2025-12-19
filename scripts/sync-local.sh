@@ -39,6 +39,17 @@ for agent in "$PROJECT_ROOT"/claude/agents/*.md; do
     fi
 done
 
+# Sync Claude skills
+mkdir -p ~/.claude/skills
+for skill_dir in "$PROJECT_ROOT"/.claude/skills/*/; do
+    if [ -d "$skill_dir" ]; then
+        skill_name=$(basename "$skill_dir")
+        mkdir -p ~/.claude/skills/"$skill_name"
+        cp -r "$skill_dir"* ~/.claude/skills/"$skill_name"/
+        echo "✓ Synced skill: $skill_name"
+    fi
+done
+
 # Sync Cursor configuration if it exists
 if [ -f "$PROJECT_ROOT/cursor/.cursorrules" ]; then
     echo -e "\n🟣 Syncing Cursor..."
