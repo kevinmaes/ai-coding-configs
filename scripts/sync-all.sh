@@ -36,6 +36,16 @@ for agent in $(git ls-tree --name-only origin/main:claude/agents/); do
     echo "✓ Synced agent: $agent"
 done
 
+# Sync Claude skills
+mkdir -p ~/.claude/skills
+for skill in $(git ls-tree --name-only -d origin/main:.claude/skills/); do
+    mkdir -p ~/.claude/skills/"$skill"
+    for file in $(git ls-tree --name-only origin/main:.claude/skills/$skill/); do
+        git show origin/main:.claude/skills/$skill/$file > ~/.claude/skills/$skill/$file
+    done
+    echo "✓ Synced skill: $skill"
+done
+
 # Sync Cursor configuration
 echo -e "\n🟣 Syncing Cursor..."
 git show origin/main:cursor/.cursorrules > ~/.cursorrules
