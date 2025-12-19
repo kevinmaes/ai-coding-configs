@@ -49,8 +49,8 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
         # Count untracked/added (new) files
         added=$(echo "$git_status" | grep "^??" | wc -l | tr -d ' ')
 
-        # Show counts in S: U: A: format
-        status="$status | S: $staged | U: $unstaged | A: $added"
+        # Show counts in S: U: A: format with file icon
+        status="$status | 📄 S: $staged | U: $unstaged | A: $added"
     fi
 fi
 
