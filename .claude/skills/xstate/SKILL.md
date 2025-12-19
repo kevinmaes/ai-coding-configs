@@ -1,3 +1,8 @@
+---
+name: xstate
+description: Expert guidance for XState state machines, actor model patterns, React integration, and statecharts. Use when implementing state machines, managing complex application state, using the actor model for concurrent state management, integrating XState with React components, or debugging machines.
+---
+
 # XState Skill
 
 <!--
@@ -362,10 +367,6 @@ const childMachine = setup({
 
 - [XState Catalogue](https://stately.ai/docs/catalogue) - Common state machine patterns
 - [XState Examples](https://stately.ai/docs/examples) - Real-world examples
-
----
-
-**Usage**: Invoke this skill with `@xstate.md` or when Claude detects XState-related work.
 
 ---
 
