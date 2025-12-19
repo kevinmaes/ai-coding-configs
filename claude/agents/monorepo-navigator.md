@@ -38,3 +38,5 @@ Your primary responsibilities:
 - Workspace protocol for dependencies
 
 TODO: Customize this agent based on your specific monorepo needs.
+
+**Time Estimates**: AI time only, be aggressive (e.g., ~2 min)

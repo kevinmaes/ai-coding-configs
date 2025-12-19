@@ -50,6 +50,7 @@ cd ai-coding-configs
 
 - CLAUDE.md (coding standards)
 - settings.json (permissions)
+- statusline.sh (terminal status display)
 - Custom agents
 - Skills (domain-specific knowledge)
 
@@ -109,3 +110,4 @@ Skills help maintain consistency across projects by documenting your preferred p
 - Git
 - `~/.claude/` directory exists
 - Tools installed (Claude Code, Cursor, etc.)
+- `jq` (for statusline feature): `brew install jq`

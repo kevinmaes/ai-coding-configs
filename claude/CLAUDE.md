@@ -102,6 +102,15 @@ This file contains global instructions and preferences that Claude should follow
 - Separate workflows for unit and E2E tests
 - All workflows must pass before PR merge allowed
 
+### GitHub CLI
+
+- **Location:** `/opt/homebrew/bin/gh` (Apple Silicon Mac - not in default PATH)
+- **Always use full path** when calling gh commands in Bash tool
+- **Examples:**
+  - `/opt/homebrew/bin/gh pr create --draft --title "..." --body "..." --assignee username`
+  - `/opt/homebrew/bin/gh issue create --title "..." --body "..."`
+- **Note:** Intel Macs may have gh at `/usr/local/bin/gh` - check both locations if needed
+
 ### Hooks
 
 - Post-edit hook: Automatically runs `pnpm format` after file edits
@@ -116,6 +125,22 @@ This file contains global instructions and preferences that Claude should follow
 - Comments: Explain "why" not "what"
 - Use emojis sparingly for visual interest ✨
 - Avoid using em dashes in documentation and writing
+
+## Estimation Format
+
+When providing time estimates for tasks, show AI implementation time only. Be aggressive, not conservative.
+
+Format: **~2 min** or in tables:
+| Task | Time |
+|------|------|
+| Refactor component | ~2 min |
+| Add new feature | ~5 min |
+| Fix bug | ~1 min |
+
+Guidelines:
+- Most single-file changes: ~1-2 min
+- Multi-file features: ~3-5 min
+- Complex refactors: ~5-10 min
 
 ## Security
 

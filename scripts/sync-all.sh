@@ -20,6 +20,16 @@ echo "✓ Synced CLAUDE.md"
 git show origin/main:claude/settings.json > ~/.claude/settings.json
 echo "✓ Synced settings.json"
 
+# Sync statusline script
+git show origin/main:claude/statusline.sh > ~/.claude/statusline.sh
+chmod +x ~/.claude/statusline.sh
+echo "✓ Synced statusline.sh"
+
+# Check for jq dependency
+if ! command -v jq &> /dev/null; then
+    echo "⚠️  Warning: jq is required for statusline. Install with: brew install jq"
+fi
+
 # Sync Claude agents
 for agent in $(git ls-tree --name-only origin/main:claude/agents/); do
     git show origin/main:claude/agents/$agent > ~/.claude/agents/$agent
