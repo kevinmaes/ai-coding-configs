@@ -199,14 +199,120 @@ invoke: {
 
 ## TypeScript Integration
 
-<!-- Add TypeScript-specific patterns -->
-<!-- Example:
-- Typing context
-- Typing events (discriminated unions)
-- Typing actions and services
-- Type inference helpers
-- Generated types from machines
--->
+### Inline Types in setup()
+
+Prefer inline types over separate interfaces for machine types. Keeps types co-located and reduces boilerplate:
+
+```typescript
+// ❌ Verbose: Separate interfaces
+interface MyMachineContext {
+  count: number;
+  data: string | null;
+}
+interface MyMachineEvents {
+  type: 'Increment';
+} | {
+  type: 'Set data';
+  data: string;
+}
+interface MyMachineInput {
+  initialCount: number;
+}
+interface MyMachineOutput {
+  finalCount: number;
+}
+
+const myMachine = setup({
+  types: {
+    context: {} as MyMachineContext,
+    events: {} as MyMachineEvents,
+    input: {} as MyMachineInput,
+    output: {} as MyMachineOutput,
+  },
+  // ...
+})
+
+// ✅ Better: Inline types
+const myMachine = setup({
+  types: {} as {
+    context: {
+      count: number;
+      data: string | null;
+    };
+    events:
+      | { type: 'Increment' }
+      | { type: 'Set data'; data: string };
+    input: {
+      initialCount: number;
+    };
+    output: {
+      finalCount: number;
+    };
+  },
+  // ...
+})
+```
+
+**When to use separate interfaces:**
+
+- Types are reused across multiple machines
+- Types are exported for external consumers
+- Complex types that benefit from JSDoc documentation
+
+### OutputFrom for Actor Done Events
+
+Use `OutputFrom` helper type to properly type `xstate.done.actor.*` events when handling invoked actor completion:
+
+```typescript
+import { type OutputFrom, setup } from 'xstate';
+
+const childMachine = setup({
+  types: {} as {
+    output: {
+      result: string;
+      count: number;
+    };
+  },
+}).createMachine({
+  // ... machine that outputs { result, count }
+});
+
+const parentMachine = setup({
+  types: {} as {
+    events:
+      | { type: 'Start' }
+      | { type: 'xstate.done.actor.childActor'; output: OutputFrom<typeof childMachine> };
+  },
+  actors: {
+    childActor: childMachine,
+  },
+}).createMachine({
+  // ...
+  states: {
+    Running: {
+      invoke: {
+        id: 'childActor',
+        src: 'childActor',
+        onDone: {
+          target: 'Complete',
+          actions: assign({
+            // TypeScript knows output has { result: string; count: number }
+            result: ({ event }) => event.output.result,
+            count: ({ event }) => event.output.count,
+          }),
+        },
+      },
+    },
+  },
+});
+```
+
+**Related helper types:**
+
+- `InputFrom<T>` - Extract input type from machine/actor
+- `ContextFrom<T>` - Extract context type from machine
+- `EventFrom<T>` - Extract events type from machine
+- `SnapshotFrom<T>` - Extract snapshot type from actor
 
 ## React Integration
 
