@@ -459,6 +459,7 @@ const childMachine = setup({
 - **Action types**: camelCase (e.g., `loadData`, `updateContext`, `sendNotification`)
 - **Delay names**: camelCase (e.g., `retryDelay`, `debounceTimeout`, `pollingInterval`)
 - **Machine names**: camelCase with "Machine" suffix (e.g., `authMachine`, `formMachine`)
+- **Actor IDs** (invoke id): Title Case (e.g., `Child Actor`, `Data Fetcher`, `Animation Runner`)
 
 ## Resources and References
 
