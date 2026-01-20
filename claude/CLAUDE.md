@@ -111,6 +111,22 @@ This file contains global instructions and preferences that Claude should follow
   - `/opt/homebrew/bin/gh issue create --title "..." --body "..."`
 - **Note:** Intel Macs may have gh at `/usr/local/bin/gh` - check both locations if needed
 
+### GitHub Issue Management
+
+When creating sub-issues or child issues:
+
+- Use GitHub's Sub-Issues API instead of markdown checkboxes
+- Create child issues first with `gh issue create`
+- Get issue IDs with `gh api repos/{owner}/{repo}/issues/{number} --jq '.id'`
+- Link as sub-issues with:
+  ```bash
+  gh api repos/{owner}/{repo}/issues/{parent}/sub_issues \
+    -X POST --input - <<< '{"sub_issue_id": <child_id>}'
+  ```
+- This creates proper hierarchical relationships visible in GitHub's UI
+- Never use markdown checkboxes for parent-child issue relationships
+- API reference: [GitHub REST API - Sub-Issues](https://docs.github.com/en/rest/issues/sub-issues)
+
 ### Hooks
 
 - Post-edit hook: Automatically runs `pnpm format` after file edits
@@ -189,4 +205,4 @@ When large changes cause many failures:
 
 ---
 
-_Last updated: 2025-08-15_
+_Last updated: 2026-01-20_
