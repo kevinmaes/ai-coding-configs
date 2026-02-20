@@ -62,5 +62,9 @@ echo -e "\n📋 Shared principles available at:"
 echo "   $PROJECT_ROOT/shared/principles.md"
 echo "   Use 'config-sync' agent to propagate changes"
 
+# Write sync version
+jq -r .version "$PROJECT_ROOT/package.json" > ~/.claude/.sync-version
+echo -e "\n📌 Synced version: $(cat ~/.claude/.sync-version)"
+
 echo -e "\n✅ All configurations synced from local files!"
 echo "⚠️  Remember to push and merge your changes to main for permanent sync"

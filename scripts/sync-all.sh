@@ -56,4 +56,8 @@ echo -e "\n📋 Shared principles available at:"
 echo "   shared/principles.md"
 echo "   Use 'config-sync' agent to propagate changes"
 
+# Write sync version
+git show origin/main:package.json | jq -r .version > ~/.claude/.sync-version
+echo -e "\n📌 Synced version: $(cat ~/.claude/.sync-version)"
+
 echo -e "\n✅ All configurations synced!"
