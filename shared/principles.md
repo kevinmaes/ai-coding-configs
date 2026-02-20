@@ -83,6 +83,7 @@ Format: **~2 min** or in tables:
 | Fix bug | ~1 min |
 
 Guidelines:
+
 - Most single-file changes: ~1-2 min
 - Multi-file features: ~3-5 min
 - Complex refactors: ~5-10 min

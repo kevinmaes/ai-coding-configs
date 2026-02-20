@@ -263,31 +263,31 @@ Child actors receive and type parent actor ref for bidirectional communication:
 ```typescript
 // Parent machine
 const parentMachine = setup({
-	actors: {
-		childActor: childMachine,
-	},
+  actors: {
+    childActor: childMachine,
+  },
 }).createMachine({
-	// ...
-	invoke: {
-		src: 'childActor',
-		input: ({ self }) => ({
-			parentRef: self, // Pass parent reference to child
-		}),
-	},
+  // ...
+  invoke: {
+    src: "childActor",
+    input: ({ self }) => ({
+      parentRef: self, // Pass parent reference to child
+    }),
+  },
 });
 
 // Child machine
 const childMachine = setup({
-	types: {
-		input: {} as {
-			parentRef: ActorRefFrom<typeof parentMachine>; // Type the parent ref
-		},
-	},
+  types: {
+    input: {} as {
+      parentRef: ActorRefFrom<typeof parentMachine>; // Type the parent ref
+    },
+  },
 }).createMachine({
-	// Child can now send events to parent
-	entry: ({ input }) => {
-		input.parentRef.send({ type: 'Child ready' });
-	},
+  // Child can now send events to parent
+  entry: ({ input }) => {
+    input.parentRef.send({ type: "Child ready" });
+  },
 });
 ```
 
