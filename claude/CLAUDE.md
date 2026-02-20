@@ -102,6 +102,13 @@ This file contains global instructions and preferences that Claude should follow
 - Separate workflows for unit and E2E tests
 - All workflows must pass before PR merge allowed
 
+### Pull Request Requirements
+
+Before creating a PR, check if the project uses changesets:
+1. Verify `.changeset/config.json` exists AND `@changesets/cli` is in devDependencies
+2. If both are true, create a changeset for the changes
+3. If not, skip changeset creation entirely
+
 ### GitHub CLI
 
 - **Location:** `/opt/homebrew/bin/gh` (Apple Silicon Mac - not in default PATH)
@@ -205,4 +212,4 @@ When large changes cause many failures:
 
 ---
 
-_Last updated: 2026-01-20_
+_Last updated: 2026-02-20_
