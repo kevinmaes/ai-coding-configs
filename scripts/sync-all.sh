@@ -56,4 +56,20 @@ echo -e "\n📋 Shared principles available at:"
 echo "   shared/principles.md"
 echo "   Use 'config-sync' agent to propagate changes"
 
+# Write sync metadata
+COMMIT_HASH=$(git rev-parse origin/main 2>/dev/null || echo "unknown")
+COMMIT_SHORT=$(git rev-parse --short origin/main 2>/dev/null || echo "unknown")
+SYNC_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+cat > ~/.claude/.sync-meta.json << SYNCEOF
+{
+  "syncedAt": "$SYNC_TIME",
+  "commit": "$COMMIT_HASH",
+  "commitShort": "$COMMIT_SHORT",
+  "branch": "main",
+  "source": "remote"
+}
+SYNCEOF
+echo -e "\n📌 Wrote sync metadata to ~/.claude/.sync-meta.json"
+
 echo -e "\n✅ All configurations synced!"

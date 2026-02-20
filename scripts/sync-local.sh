@@ -62,5 +62,23 @@ echo -e "\n📋 Shared principles available at:"
 echo "   $PROJECT_ROOT/shared/principles.md"
 echo "   Use 'config-sync' agent to propagate changes"
 
+# Write sync metadata
+COMMIT_HASH=$(git -C "$PROJECT_ROOT" rev-parse HEAD 2>/dev/null || echo "unknown")
+COMMIT_SHORT=$(git -C "$PROJECT_ROOT" rev-parse --short HEAD 2>/dev/null || echo "unknown")
+BRANCH=$(git -C "$PROJECT_ROOT" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
+SYNC_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+cat > ~/.claude/.sync-meta.json << SYNCEOF
+{
+  "syncedAt": "$SYNC_TIME",
+  "commit": "$COMMIT_HASH",
+  "commitShort": "$COMMIT_SHORT",
+  "branch": "$BRANCH",
+  "source": "local",
+  "projectRoot": "$PROJECT_ROOT"
+}
+SYNCEOF
+echo -e "\n📌 Wrote sync metadata to ~/.claude/.sync-meta.json"
+
 echo -e "\n✅ All configurations synced from local files!"
 echo "⚠️  Remember to push and merge your changes to main for permanent sync"
