@@ -27,8 +27,8 @@ git clone https://github.com/[username]/ai-coding-configs.git
 cd ai-coding-configs
 
 # Run interactive setup
-pnpm install
-pnpm setup
+bun install   # or: pnpm install
+bun setup     # or: pnpm setup
 
 # Add ai-config to PATH
 echo "export PATH=\"\$PATH:$(pwd)/scripts\"" >> ~/.bashrc  # or ~/.zshrc
@@ -90,7 +90,7 @@ These agents are automatically synced to `~/.claude/agents/` for use with Claude
 - **config-sync** - Translates principles across tools
 - **quality-checker** - Runs tests, lint, typecheck
 - **dependency-updater** - Updates packages safely
-- **monorepo-navigator** - pnpm workspace helper
+- **monorepo-navigator** - pnpm/Bun workspace helper
 
 [Learn more about how we enhance Claude Code →](docs/claude-code-features.md)
 

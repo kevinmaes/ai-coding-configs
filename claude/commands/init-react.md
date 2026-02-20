@@ -19,6 +19,13 @@ Set up a new React project with TypeScript, Vite, and our standard configuration
 ## Command:
 
 ```bash
+# Using Bun (default):
+bun create vite . --template react-ts
+bun install
+bun add @tanstack/react-query react-router-dom
+bun add -D @testing-library/react @testing-library/jest-dom vitest
+
+# Using pnpm:
 pnpm create vite . --template react-ts
 pnpm install
 pnpm add @tanstack/react-query react-router-dom

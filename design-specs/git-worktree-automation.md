@@ -9,14 +9,14 @@ Working on automating Git worktree management for multi-branch development with 
 - Create new worktree + branch in one command
 - Auto-assign unused localhost ports for dev servers
 - Copy `.env.local` to new worktree directories
-- Run `pnpm install` automatically
+- Run `bun install` / `pnpm install` automatically
 - Integrate with VS Code/Claude Code workflow
 
 ### Current Tech Stack
 
 - TypeScript primary language
 - VS Code development environment
-- PNPM package manager
+- Bun or pnpm package manager
 - Next.js (implied from port 3000 default)
 
 ## Proposed Solutions Discussed
