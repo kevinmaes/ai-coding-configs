@@ -16,6 +16,11 @@ Run formatting and linting fixes to clean up code before committing.
 ## Commands:
 
 ```bash
+# Using Bun (default):
+bun format
+bun lint:fix
+
+# Using pnpm:
 pnpm format
 pnpm lint:fix
 ```

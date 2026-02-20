@@ -72,7 +72,13 @@ This file contains global instructions and preferences that Claude should follow
 
 ### Tools & Scripts
 
-- Package manager: pnpm (including monorepos)
+- Package manager: Bun (default for new projects)
+- Existing projects: detect in this order:
+  1. `packageManager` field in package.json (Corepack) - use whichever it specifies
+  2. Lockfile (bun.lockb -> Bun, pnpm-lock.yaml -> pnpm)
+  3. Fall back to Bun
+- Monorepos: pnpm workspaces (until Bun workspace support matures)
+- When an existing project uses pnpm, use pnpm but consider recommending a Bun migration
 - Build: Vite (unless Next.js)
 - Test: Vitest (unit), React Testing Library, Playwright (E2E)
 - Test structure: AAA pattern (Arrange, Act, Assert)
@@ -97,7 +103,7 @@ This file contains global instructions and preferences that Claude should follow
 - Branches: `feature/description-kebab-case` or GitHub issue names
 - Commits: AI uses conventional commits, humans use single line + details
 - Commit messages: Be concise and direct. Avoid overusing words like "Enhanced" or "Enhancing". Simply state what was done
-- Before committing: Run `pnpm format` to ensure Prettier formatting
+- Before committing: Run `bun format` (or `pnpm format` if the project uses pnpm) to ensure Prettier formatting
 - CI/CD: Quality checks on PRs to main/dev (lint, types, format)
 - Separate workflows for unit and E2E tests
 - All workflows must pass before PR merge allowed
@@ -129,8 +135,8 @@ When creating sub-issues or child issues:
 
 ### Hooks
 
-- Post-edit hook: Automatically runs `pnpm format` after file edits
-- Ensures consistent code formatting throughout the session
+- Post-edit hook: Automatically runs format after file edits
+- Uses the project's package manager (Bun or pnpm)
 - Configured in claude/settings.json
 
 ## Documentation 📝
@@ -205,4 +211,4 @@ When large changes cause many failures:
 
 ---
 
-_Last updated: 2026-01-20_
+_Last updated: 2026-02-20_
