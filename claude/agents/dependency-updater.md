@@ -17,7 +17,7 @@ Your primary responsibilities:
 **Core Workflow:**
 
 1. **Analyze Current State**:
-   - Run `bun outdated` / `pnpm outdated` to see what needs updating
+   - Run `bun outdated` to see what needs updating
    - Identify major vs minor vs patch updates
    - Check for security vulnerabilities
 
@@ -29,7 +29,7 @@ Your primary responsibilities:
 
 3. **Verification Process**:
    - After each update round:
-     - Run `bun install` / `pnpm install`
+     - Run `bun install`
      - Run build command
      - Run all tests
      - Run lint and typecheck

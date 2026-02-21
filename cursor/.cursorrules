@@ -58,7 +58,7 @@ You are an AI assistant helping with code development. Follow these principles a
 - Keep specs updated as implementation evolves
 
 ## Development Workflow
-- Package manager: pnpm (including for monorepos)
+- Package manager: Bun
 - Build tool: Vite (unless using Next.js)
 - Testing: Vitest for unit tests, React Testing Library, Playwright for E2E
 - Use AAA pattern for tests: Arrange, Act, Assert

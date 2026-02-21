@@ -4,7 +4,7 @@ This directory contains changeset files that describe changes for each PR.
 
 ## Creating a changeset
 
-Run `pnpm changeset` and follow the prompts, then commit the generated file with your PR.
+Run `bun changeset` and follow the prompts, then commit the generated file with your PR.
 
 ## Changeset types
 
@@ -17,7 +17,7 @@ Run `pnpm changeset` and follow the prompts, then commit the generated file with
 ### Single Branch Workflow
 
 1. Create feature branch from `main`
-2. Make changes and create changeset (`pnpm changeset`)
+2. Make changes and create changeset (`bun changeset`)
 3. Create PR to `main`
 4. Merge PR - Release workflow creates "Version Packages" PR
 5. Merge "Version Packages" PR - Creates git tags and GitHub releases

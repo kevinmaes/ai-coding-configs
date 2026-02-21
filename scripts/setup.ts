@@ -1,4 +1,4 @@
-#!/usr/bin/env tsx
+#!/usr/bin/env bun
 
 import { intro, outro, confirm, spinner, log } from "@clack/prompts";
 import kleur from "kleur";

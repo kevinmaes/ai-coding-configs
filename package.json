@@ -4,7 +4,7 @@
   "description": "Unified configuration for AI coding assistants",
   "type": "module",
   "scripts": {
-    "setup": "tsx scripts/setup.ts",
+    "setup": "bun scripts/setup.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "sync": "scripts/sync-all.sh",
@@ -21,8 +21,6 @@
     "@changesets/cli": "^2.29.8",
     "@types/node": "^20.0.0",
     "prettier": "^3.6.2",
-    "tsx": "^4.0.0",
     "typescript": "^5.0.0"
-  },
-  "packageManager": "pnpm@9.15.2"
+  }
 }
