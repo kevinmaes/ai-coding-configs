@@ -1,6 +1,6 @@
 {
   "allow": [
-    "pnpm:*",
+    "bun:*",
     "git add:*",
     "git commit:*",
     "git status:*",
@@ -18,10 +18,10 @@
     "mcp__ide__getDiagnostics"
   ],
   "deny": ["rm -rf /*", "sudo:*"],
-  "ask": ["git push:*", "npm install:*", "pnpm add:*", "brew install:*"],
+  "ask": ["git push:*", "npm install:*", "bun add:*", "brew install:*"],
   "hooks": {
     "post-edit": {
-      "command": "pnpm format"
+      "command": "bun run format"
     }
   },
   "env": {

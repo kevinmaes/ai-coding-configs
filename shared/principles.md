@@ -59,10 +59,9 @@ This is the source of truth for coding standards across all AI assistants.
 
 ## Developer Experience
 
-- Bun for package management (default), pnpm for monorepos
+- Bun for package management
 - Vite for build (unless Next.js)
 - Prettier with default settings
-- ESLint with eslint.config.js
 
 ## Documentation
 

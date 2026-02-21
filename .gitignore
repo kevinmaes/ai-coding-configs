@@ -19,4 +19,4 @@ node_modules/
 # Logs
 *.log
 npm-debug.log*
-pnpm-debug.log*
+bun-debug.log*
